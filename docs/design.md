@@ -172,3 +172,26 @@ Les boutons doivent rester faciles à cliquer sur petit écran.
 - Faut-il utiliser une sidebar ou une navbar pour l’espace admin ?
 - Faut-il afficher les ressources en cartes ou en tableau côté utilisateur ?
 - Faut-il utiliser des icônes pour les types de fichiers ?
+
+## 10. Décision de navigation
+
+Pour la première version de ZDrive, la navigation principale se fera avec une navbar simple placée en haut de l’écran.
+
+Cette navbar sera utilisée dans l’espace utilisateur et dans l’espace administrateur.
+
+Ce choix permet de garder une interface simple, claire et facile à développer pour le MVP.
+
+### Navbar utilisateur
+
+Pour un utilisateur étudiant connecté, la navbar contiendra :
+
+- le nom ZDrive ;
+- un lien vers l’accueil ;
+- un lien vers les semestres ;
+- un bouton de déconnexion.
+
+Exemple :
+
+```txt
+ZDrive | Accueil | Semestres | Déconnexion
+```
