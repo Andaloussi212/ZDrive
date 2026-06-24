@@ -1,24 +1,21 @@
 import { semesters } from '../data/mockData';
+import SemestersCard from '../components/SemestersCard';
 
 function SemestersPage() {
   return (
     <>
       <main className="semesters-page">
         <header className="page-header">
-          <h1>Semestre</h1>
+          <h1>Semestres</h1>
           <p>
-            Choisit un semestre pour consulter les matières et les ressources
-            associés
+            Choisis un semestre pour consulter les matières et les ressources
+            associées
           </p>
         </header>
 
         <section className="semesters-grid">
           {semesters.map((semester) => (
-            <article className="semesters-card" key={semester.id}>
-              <h2>{semester.name}</h2>
-              <p>{semester.year}</p>
-              <p>{semester.description}</p>
-            </article>
+            <SemestersCard key={semester.id} semester={semester} />
           ))}
         </section>
       </main>
