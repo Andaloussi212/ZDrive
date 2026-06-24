@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+
 function LoginPage() {
   return (
     <>
@@ -11,8 +12,8 @@ function LoginPage() {
         <label htmlFor="password">Mot de passe</label>
         <input type="password" id="password" /> <br />
         <br />
+        <Button text="Se Connecter" />
       </form>
-      <Button texte="Se Connecter" />
     </>
   );
 }
