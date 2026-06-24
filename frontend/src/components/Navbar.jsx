@@ -2,11 +2,11 @@ import Button from './Button';
 function Navbar() {
   return (
     <>
-      <nav>
-        <div className="logo">ZDrive</div>
-        <div className="links">
+      <nav className="navbar">
+        <div className="navbar-logo">ZDrive</div>
+        <div className="navbar-links">
           <a href="#">Accueil</a>
-          <a href="#">Semestre</a>
+          <a href="#">Semestres</a>
           <Button text="Déconnexion" />
         </div>
       </nav>
