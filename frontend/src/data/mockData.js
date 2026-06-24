@@ -13,16 +13,16 @@ export const semesters = [
   },
 ];
 
-export const subject = [
+export const subjects = [
   {
     id: 1,
     name: 'Bases de la programmation',
-    semestersId: 1,
+    semesterId: 1,
   },
   {
     id: 2,
     name: 'Conception Objet',
-    semestersId: 2,
+    semesterId: 2,
   },
 ];
 
@@ -37,7 +37,7 @@ export const resources = [
   {
     id: 2,
     title: 'Fiche de révision COO',
-    type: 'fiche',
+    type: 'FICHE',
     format: 'PDF',
     subjectId: 2,
   },
