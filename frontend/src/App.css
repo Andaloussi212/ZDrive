@@ -263,3 +263,24 @@
 .home-card a:hover {
   background: #16613c;
 }
+
+.resource-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.resource-actions button {
+  flex: 1;
+  background: #1f7a4d;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.resource-actions button:hover {
+  background: #16613c;
+}

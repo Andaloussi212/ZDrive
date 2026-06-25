@@ -1,3 +1,4 @@
+import Button from './Button';
 function ResourceCard({ resource }) {
   return (
     <>
@@ -5,6 +6,10 @@ function ResourceCard({ resource }) {
         <h2>{resource.title}</h2>
         <p>{resource.type}</p>
         <p>{resource.format}</p>
+        <div className="resource-actions">
+          <Button text="Consulter" />
+          <Button text="Télécharger" />
+        </div>
       </article>
     </>
   );
