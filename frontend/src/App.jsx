@@ -8,6 +8,7 @@ import SubjectsPage from './pages/SubjectsPage';
 import ResourcesPage from './pages/ResourcesPage';
 import HomePage from './pages/HomePage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminResourcesPage from './pages/AdminResourcesPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/semesters/:semesterId" element={<SubjectsPage />} />
         <Route path="/subjects/:subjectId" element={<ResourcesPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/admin/resources" element={<AdminResourcesPage />} />
       </Routes>
     </BrowserRouter>
   );
