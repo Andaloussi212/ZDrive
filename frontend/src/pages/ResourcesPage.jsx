@@ -11,7 +11,7 @@ function ResourcesPage() {
       <main className="resources-page">
         <header className="page-header">
           <h1>Ressources</h1>
-          <p>Liste des fichiers disponibles pour cette matière</p>
+          <p>Liste des fichiers disponibless pour cette matière</p>
         </header>
 
         <section className="resources-grid">

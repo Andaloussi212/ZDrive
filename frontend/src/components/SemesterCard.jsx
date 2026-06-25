@@ -1,7 +1,7 @@
-function SemestersCard({ semester }) {
+function SemesterCard({ semester }) {
   return (
     <>
-      <article className="semesters-card">
+      <article className="semester-card">
         <h2>{semester.name}</h2>
         <p>{semester.year}</p>
         <p>{semester.description}</p>
@@ -10,4 +10,4 @@ function SemestersCard({ semester }) {
   );
 }
 
-export default SemestersCard;
+export default SemesterCard;

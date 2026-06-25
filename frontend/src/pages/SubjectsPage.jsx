@@ -11,7 +11,7 @@ function SubjectsPage() {
       <main className="subjects-page">
         <header className="page-header">
           <h1>Matières</h1>
-          <p>Liste des matières disponible pour ce semestre</p>
+          <p>Liste des matières disponibles pour ce semestre</p>
         </header>
 
         <section className="subjects-grid">

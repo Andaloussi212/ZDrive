@@ -1,14 +1,12 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import SemestersPage from './pages/SemestersPage';
-import SubjectsPage from './pages/SubjectsPage';
-import RessourcesPage from './pages/RessourcesPage';
+import ResourcesPage from './pages/ResourcesPage';
 
 function App() {
   return (
     <>
       <Navbar />
-      <RessourcesPage />
+      <ResourcesPage />
     </>
   );
 }

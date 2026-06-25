@@ -148,7 +148,7 @@
   gap: 24px;
 }
 
-.semesters-card {
+.semester-card {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -156,12 +156,12 @@
   box-shadow: 0 12px 32px rgba(15, 61, 46, 0.08);
 }
 
-.semesters-card h2 {
+.semester-card h2 {
   margin: 0;
   color: #0f3d2e;
 }
 
-.semesters-card p {
+.semester-card p {
   color: #6b7280;
 }
 
@@ -178,7 +178,7 @@
   gap: 24px;
 }
 
-.subjects-card {
+.subject-card {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -186,29 +186,25 @@
   box-shadow: 0 12px 32px rgba(15, 61, 46, 0.08);
 }
 
-.subjects-card h2 {
+.subject-card h2 {
   margin: 0;
-  color: #6b7280;
+  color: #0f3d2e;
 }
 
-.semesters-card p {
-  color: #6b7280;
-}
-
-.ressources-page {
+.resources-page {
   min-height: calc(100vh - 64px);
   padding: 48px 32px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.ressources-grid {
+.resources-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
 }
 
-.ressources-card {
+.resource-card {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -216,12 +212,12 @@
   box-shadow: 0 12px 32px rgba(15, 61, 46, 0.08);
 }
 
-.ressources-card h2 {
+.resource-card h2 {
   margin: 0 0 12px;
   color: #0f3d2e;
 }
 
-.ressources-card p {
+.resource-card p {
   color: #6b7280;
   margin: 6px 0;
 }
