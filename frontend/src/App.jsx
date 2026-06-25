@@ -9,6 +9,7 @@ import ResourcesPage from './pages/ResourcesPage';
 import HomePage from './pages/HomePage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminResourcesPage from './pages/AdminResourcesPage';
+import AdminNewResourcePage from './pages/AdminNewResourcePage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/subjects/:subjectId" element={<ResourcesPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="/admin/resources" element={<AdminResourcesPage />} />
+        <Route path="/admin/resources/new" element={<AdminNewResourcePage />} />
       </Routes>
     </BrowserRouter>
   );
