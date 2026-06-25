@@ -10,6 +10,7 @@ function Navbar() {
           <Link to="/semesters">Semestres</Link>
           <Link to="/subjects">Matières</Link>
           <Link to="/resources">Ressources</Link>
+          <Link to="/admin">Admin</Link>
           <Button text="Déconnexion" />
         </div>
       </nav>
