@@ -301,3 +301,12 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
+
+.empty-message {
+  background: white;
+  border: 1px dashed #cbd5e1;
+  color: #6b7280;
+  border-radius: 18px;
+  padding: 24px;
+  font-weight: 600;
+}

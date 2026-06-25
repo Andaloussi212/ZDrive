@@ -20,12 +20,17 @@ function ResourcesPage() {
           </h1>
           <p>Liste des fichiers disponibless pour cette matière</p>
         </header>
-
-        <section className="resources-grid">
-          {filteredResources.map((resource) => (
-            <ResourceCard key={resource.id} resource={resource} />
-          ))}
-        </section>
+        {filteredResources.length > 0 ? (
+          <section className="resources-grid">
+            {filteredResources.map((resource) => (
+              <ResourceCard key={resource.id} resource={resource} />
+            ))}
+          </section>
+        ) : (
+          <p className="empty-message">
+            Aucune ressource disponible pour cette matière.
+          </p>
+        )}
       </main>
     </>
   );

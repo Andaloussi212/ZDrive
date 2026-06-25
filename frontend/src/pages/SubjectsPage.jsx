@@ -21,11 +21,17 @@ function SubjectsPage() {
           <p>Liste des matières disponibles pour ce semestre</p>
         </header>
 
-        <section className="subjects-grid">
-          {filteredSubjects.map((subject) => (
-            <SubjectCard key={subject.id} subject={subject} />
-          ))}
-        </section>
+        {filteredSubjects.length > 0 ? (
+          <section className="subjects-grid">
+            {filteredSubjects.map((subject) => (
+              <SubjectCard key={subject.id} subject={subject} />
+            ))}
+          </section>
+        ) : (
+          <p className="empty-message">
+            Aucune matière disponible pour ce semestre
+          </p>
+        )}
       </main>
     </>
   );
