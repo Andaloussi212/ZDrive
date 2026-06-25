@@ -1,5 +1,5 @@
 import { semesters } from '../data/mockData';
-import SemestersCard from '../components/SemestersCard';
+import SemesterCard from '../components/SemesterCard';
 
 function SemestersPage() {
   return (
@@ -15,7 +15,7 @@ function SemestersPage() {
 
         <section className="semesters-grid">
           {semesters.map((semester) => (
-            <SemestersCard key={semester.id} semester={semester} />
+            <SemesterCard key={semester.id} semester={semester} />
           ))}
         </section>
       </main>
