@@ -1,5 +1,5 @@
 import { ressources } from '../data/mockData';
-
+import RessourceCard from '../components/RessourcesCard';
 function RessourcesPage() {
   const SelectedSubjectId = 1;
   const filteredRessources = ressources.filter(
@@ -15,11 +15,7 @@ function RessourcesPage() {
 
         <section className="ressources-grid">
           {filteredRessources.map((ressource) => (
-            <article className="ressources-card" key={ressource.id}>
-              <h2>{ressource.title}</h2>
-              <p>{ressource.type}</p>
-              <p>{ressource.format}</p>
-            </article>
+            <RessourceCard key={ressource.id} ressource={ressource} />
           ))}
         </section>
       </main>
