@@ -1,10 +1,12 @@
 import { resources } from '../data/mockData';
 import ResourceCard from '../components/ResourceCard';
+import { useParams } from 'react-router-dom';
 
 function ResourcesPage() {
-  const SelectedSubjectId = 1;
+  const { subjectId } = useParams();
+  const selectedSubjectId = Number(subjectId);
   const filteredResources = resources.filter(
-    (resource) => resource.subjectId === SelectedSubjectId
+    (resource) => resource.subjectId === selectedSubjectId
   );
   return (
     <>

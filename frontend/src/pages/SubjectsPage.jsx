@@ -1,8 +1,10 @@
 import { subjects } from '../data/mockData';
 import SubjectCard from '../components/SubjectCard';
+import { useParams } from 'react-router-dom';
 
 function SubjectsPage() {
-  const selectedSemesterId = 1;
+  const { semesterId } = useParams();
+  const selectedSemesterId = Number(semesterId);
   const filteredSubjects = subjects.filter(
     (subject) => subject.semesterId === selectedSemesterId
   );

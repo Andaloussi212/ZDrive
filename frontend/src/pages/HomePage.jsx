@@ -8,7 +8,7 @@ function HomePage() {
 
         <p>
           Plateforme privée de ressources étudiantes pour consulter, organiser
-          et télécharger des documents de cours.
+          et télécharger des documents de cours
         </p>
 
         <Link to="/semesters">Accéder aux semestres</Link>
