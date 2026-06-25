@@ -1,6 +1,6 @@
 import { resources, subjects } from '../data/mockData';
 import ResourceCard from '../components/ResourceCard';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 function ResourcesPage() {
   const { subjectId } = useParams();
@@ -15,6 +15,16 @@ function ResourcesPage() {
     <>
       <main className="resources-page">
         <header className="page-header">
+          <Link
+            to={
+              selectedSubject
+                ? `/semesters/${selectedSubject.semesterId}`
+                : '/semesters'
+            }
+            className="back-link"
+          >
+            ⬅️ Retour aux matières
+          </Link>
           <h1>
             {selectedSubject ? selectedSubject.name : 'Matière Introuvable'}
           </h1>

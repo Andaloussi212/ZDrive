@@ -1,6 +1,6 @@
 import { subjects, semesters } from '../data/mockData';
 import SubjectCard from '../components/SubjectCard';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 function SubjectsPage() {
   const { semesterId } = useParams();
@@ -15,6 +15,9 @@ function SubjectsPage() {
     <>
       <main className="subjects-page">
         <header className="page-header">
+          <Link to="/semesters" className="back-link">
+            ⬅️ Retour aux semestres
+          </Link>
           <h1>
             {selectedSemester ? selectedSemester.name : 'Semestre introuvable'}
           </h1>
