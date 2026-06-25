@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SemestersPage from './pages/SemestersPage';
 import SubjectsPage from './pages/SubjectsPage';
 import ResourcesPage from './pages/ResourcesPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/semesters" element={<SemestersPage />} />
         <Route path="/subjects" element={<SubjectsPage />} />
