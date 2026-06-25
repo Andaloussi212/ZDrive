@@ -26,7 +26,7 @@ export const subjects = [
   },
 ];
 
-export const resources = [
+export const ressources = [
   {
     id: 1,
     title: 'Fiche de révision Java',

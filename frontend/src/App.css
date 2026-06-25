@@ -194,3 +194,34 @@
 .semesters-card p {
   color: #6b7280;
 }
+
+.ressources-page {
+  min-height: calc(100vh - 64px);
+  padding: 48px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ressources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.ressources-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 12px 32px rgba(15, 61, 46, 0.08);
+}
+
+.ressources-card h2 {
+  margin: 0 0 12px;
+  color: #0f3d2e;
+}
+
+.ressources-card p {
+  color: #6b7280;
+  margin: 6px 0;
+}
