@@ -284,3 +284,20 @@
 .resource-actions button:hover {
   background: #16613c;
 }
+
+.resource-meta {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.resource-badge {
+  display: inline-block;
+  align-items: center;
+  background: #d8f3dc;
+  color: #0f3d2e;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
