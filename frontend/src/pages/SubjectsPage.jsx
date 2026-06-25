@@ -1,4 +1,5 @@
 import { subjects } from '../data/mockData';
+import SubjectsCard from '../components/SubjectsCard';
 
 function SubjectsPage() {
   const selectedSemesterId = 1;
@@ -15,9 +16,7 @@ function SubjectsPage() {
 
         <section className="subjects-grid">
           {filteredSubjects.map((subject) => (
-            <article className="subjects-card" key={subject.id}>
-              <h2>{subject.name}</h2>
-            </article>
+            <SubjectsCard key={subject.id} subject={subject} />
           ))}
         </section>
       </main>
