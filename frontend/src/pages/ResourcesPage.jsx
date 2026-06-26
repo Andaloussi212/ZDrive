@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ResourceCard from '../components/ResourceCard';
 import { useParams, Link } from 'react-router-dom';
+import { getSubjects, getResources } from '../services/Api';
 
 function ResourcesPage() {
   const { subjectId } = useParams();
@@ -10,17 +11,13 @@ function ResourcesPage() {
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/subjects')
-      .then((response) => response.json())
-      .then((data) => {
-        setSubjects(data);
-      });
+    getSubjects().then((data) => {
+      setSubjects(data);
+    });
 
-    fetch('http://localhost:8080/api/resources')
-      .then((response) => response.json())
-      .then((data) => {
-        setResources(data);
-      });
+    getResources().then((data) => {
+      setResources(data);
+    });
   }, []);
 
   const selectedSubject = subjects.find(

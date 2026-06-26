@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SubjectCard from '../components/SubjectCard';
 import { useParams, Link } from 'react-router-dom';
+import { getSemesters, getSubjects } from '../services/Api';
 
 function SubjectsPage() {
   const { semesterId } = useParams();
@@ -10,17 +11,13 @@ function SubjectsPage() {
   const [subjects, setSubjects] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/semesters')
-      .then((response) => response.json())
-      .then((data) => {
-        setSemesters(data);
-      });
+    getSemesters().then((data) => {
+      setSemesters(data);
+    });
 
-    fetch('http://localhost:8080/api/subjects')
-      .then((response) => response.json())
-      .then((data) => {
-        setSubjects(data);
-      });
+    getSubjects().then((data) => {
+      setSubjects(data);
+    });
   }, []);
 
   const selectedSemester = semesters.find(
