@@ -6,7 +6,7 @@ function Navbar() {
       <nav className="navbar">
         <div className="navbar-logo">ZDrive</div>
         <div className="navbar-links">
-          <Link to="/login">Accueil</Link>
+          <Link to="/">Accueil</Link>
           <Link to="/semesters">Semestres</Link>
           <Link to="/admin">Admin</Link>
           <Button text="Déconnexion" />

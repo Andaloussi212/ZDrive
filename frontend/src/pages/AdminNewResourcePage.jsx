@@ -93,7 +93,7 @@ function AdminNewResourcePage() {
               id="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="courte description de la ressource"
+              placeholder="Courte description de la ressource"
             ></textarea>
           </div>
 

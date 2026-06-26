@@ -12,31 +12,29 @@ function SubjectsPage() {
     (subject) => subject.semesterId === selectedSemesterId
   );
   return (
-    <>
-      <main className="subjects-page">
-        <header className="page-header">
-          <Link to="/semesters" className="back-link">
-            ⬅️ Retour aux semestres
-          </Link>
-          <h1>
-            {selectedSemester ? selectedSemester.name : 'Semestre introuvable'}
-          </h1>
-          <p>Liste des matières disponibles pour ce semestre</p>
-        </header>
+    <main className="subjects-page">
+      <header className="page-header">
+        <Link to="/semesters" className="back-link">
+          ⬅️ Retour aux semestres
+        </Link>
+        <h1>
+          {selectedSemester ? selectedSemester.name : 'Semestre introuvable'}
+        </h1>
+        <p>Liste des matières disponibles pour ce semestre</p>
+      </header>
 
-        {filteredSubjects.length > 0 ? (
-          <section className="subjects-grid">
-            {filteredSubjects.map((subject) => (
-              <SubjectCard key={subject.id} subject={subject} />
-            ))}
-          </section>
-        ) : (
-          <p className="empty-message">
-            Aucune matière disponible pour ce semestre
-          </p>
-        )}
-      </main>
-    </>
+      {filteredSubjects.length > 0 ? (
+        <section className="subjects-grid">
+          {filteredSubjects.map((subject) => (
+            <SubjectCard key={subject.id} subject={subject} />
+          ))}
+        </section>
+      ) : (
+        <p className="empty-message">
+          Aucune matière disponible pour ce semestre
+        </p>
+      )}
+    </main>
   );
 }
 
