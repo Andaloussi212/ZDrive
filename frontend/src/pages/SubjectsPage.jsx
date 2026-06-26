@@ -1,10 +1,28 @@
-import { subjects, semesters } from '../data/mockData';
+import { useEffect, useState } from 'react';
 import SubjectCard from '../components/SubjectCard';
 import { useParams, Link } from 'react-router-dom';
 
 function SubjectsPage() {
   const { semesterId } = useParams();
   const selectedSemesterId = Number(semesterId);
+
+  const [semesters, setSemesters] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/semesters')
+      .then((response) => response.json())
+      .then((data) => {
+        setSemesters(data);
+      });
+
+    fetch('http://localhost:8080/api/subjects')
+      .then((response) => response.json())
+      .then((data) => {
+        setSubjects(data);
+      });
+  }, []);
+
   const selectedSemester = semesters.find(
     (semester) => semester.id === selectedSemesterId
   );

@@ -1,7 +1,16 @@
-import { semesters } from '../data/mockData';
 import SemesterCard from '../components/SemesterCard';
+import { useEffect, useState } from 'react';
 
 function SemestersPage() {
+  const [semesters, setSemesters] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/semesters')
+      .then((response) => response.json())
+      .then((data) => {
+        setSemesters(data);
+      });
+  }, []);
   return (
     <main className="semesters-page">
       <header className="page-header">

@@ -19,7 +19,7 @@ public class Subject {
     return this.name;
   }
 
-  public long semesterId() {
+  public long getSemesterId() {
     return this.semesterId;
   }
 

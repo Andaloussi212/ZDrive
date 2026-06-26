@@ -1,10 +1,28 @@
-import { resources, subjects } from '../data/mockData';
+import { useEffect, useState } from 'react';
 import ResourceCard from '../components/ResourceCard';
 import { useParams, Link } from 'react-router-dom';
 
 function ResourcesPage() {
   const { subjectId } = useParams();
   const selectedSubjectId = Number(subjectId);
+
+  const [subjects, setSubjects] = useState([]);
+  const [resources, setResources] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/subjects')
+      .then((response) => response.json())
+      .then((data) => {
+        setSubjects(data);
+      });
+
+    fetch('http://localhost:8080/api/resources')
+      .then((response) => response.json())
+      .then((data) => {
+        setResources(data);
+      });
+  }, []);
+
   const selectedSubject = subjects.find(
     (subject) => subject.id === selectedSubjectId
   );
