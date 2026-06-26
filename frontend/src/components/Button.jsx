@@ -1,8 +1,8 @@
-function Button(props) {
+function Button({ text, type = 'button', variant = 'primary' }) {
   return (
-    <>
-      <button>{props.text}</button>
-    </>
+    <button type={type} className={`button button-${variant}`}>
+      {text}
+    </button>
   );
 }
 

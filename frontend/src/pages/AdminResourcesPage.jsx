@@ -27,8 +27,8 @@ function AdminResourcesPage() {
                 <td>{resource.type}</td>
                 <td>{resource.format}</td>
                 <td className="admin-table-actions">
-                  <Button text="Modifier" />
-                  <Button text="Supprimer" />
+                  <Button text="Modifier" variant="secondary" />
+                  <Button text="Supprimer" variant="danger" />
                 </td>
               </tr>
             ))}

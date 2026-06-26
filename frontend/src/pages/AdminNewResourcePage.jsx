@@ -114,7 +114,7 @@ function AdminNewResourcePage() {
             <input type="file" id="file" onChange={handleFileChange} />
           </div>
 
-          <Button text="Ajouter la ressource" />
+          <Button text="Ajouter la ressource" type="submit" />
         </form>
       </section>
     </main>
