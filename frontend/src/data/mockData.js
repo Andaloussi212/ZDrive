@@ -48,3 +48,4 @@ export const resources = [
     subjectId: 2,
   },
 ];
+export const resourceTypes = ['COURS', 'TD', 'TP', 'FICHE', 'EXAM', 'OTHER'];

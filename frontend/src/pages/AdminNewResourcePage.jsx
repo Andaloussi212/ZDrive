@@ -1,5 +1,5 @@
 import Button from '../components/Button';
-import { semesters, subjects } from '../data/mockData';
+import { semesters, subjects, resourceTypes } from '../data/mockData';
 import { useState } from 'react';
 
 function AdminNewResourcePage() {
@@ -129,12 +129,11 @@ function AdminNewResourcePage() {
           <div className="form-group">
             <label htmlFor="type">Type de ressource</label>
             <select id="type" value={formData.type} onChange={handleChange}>
-              <option>COURS</option>
-              <option>TD</option>
-              <option>TP</option>
-              <option>FICHE</option>
-              <option>EXAM</option>
-              <option>OTHER</option>
+              {resourceTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
           </div>
 
