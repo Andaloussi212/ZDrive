@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminResourcesPage from './pages/AdminResourcesPage';
 import AdminNewResourcePage from './pages/AdminNewResourcePage';
+import AdminSettingsPage from './pages/AdminSettingsPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="/admin/resources" element={<AdminResourcesPage />} />
         <Route path="/admin/resources/new" element={<AdminNewResourcePage />} />
+        <Route path="/admin/settings" element={<AdminSettingsPage />} />
       </Routes>
     </BrowserRouter>
   );
