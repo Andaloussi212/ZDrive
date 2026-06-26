@@ -1,16 +1,44 @@
 import Button from '../components/Button';
-import { semesters, subjects, resourceTypes } from '../data/mockData';
-import { useState } from 'react';
+import { resourceTypes } from '../data/mockData';
+import { getSemesters, getSubjects } from '../services/Api';
+import { useEffect, useState } from 'react';
 
 function AdminNewResourcePage() {
+  const [semesters, setSemesters] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    semesterId: semesters[0]?.id || '',
-    subjectId: subjects[0]?.id || '',
+    semesterId: '',
+    subjectId: '',
     type: 'COURS',
     file: null,
   });
+
+  useEffect(() => {
+    getSemesters().then((data) => {
+      setSemesters(data);
+
+      if (data.length > 0) {
+        setFormData((previousFormData) => ({
+          ...previousFormData,
+          semesterId: data[0].id,
+        }));
+      }
+    });
+
+    getSubjects().then((data) => {
+      setSubjects(data);
+
+      if (data.length > 0) {
+        setFormData((previousFormData) => ({
+          ...previousFormData,
+          subjectId: data[0].id,
+        }));
+      }
+    });
+  }, []);
 
   const filteredSubjects = subjects.filter(
     (subject) => subject.semesterId === Number(formData.semesterId)
