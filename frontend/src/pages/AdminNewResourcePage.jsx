@@ -27,6 +27,17 @@ function AdminNewResourcePage() {
       file: event.target.files[0],
     });
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (formData.title.trim() === '') {
+      alert('Le titre est obligatoire');
+      return;
+    }
+
+    console.log('Nouvelle ressource : ', formData);
+  }
   return (
     <main className="admin-page">
       <header className="page-header">
@@ -35,7 +46,7 @@ function AdminNewResourcePage() {
       </header>
 
       <section className="admin-form-card">
-        <form className="admin-form">
+        <form className="admin-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Titre</label>
             <input
