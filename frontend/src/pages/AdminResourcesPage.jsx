@@ -1,7 +1,15 @@
-import { resources } from '../data/mockData';
+import { useEffect, useState } from 'react';
+import { getResources } from '../services/Api';
 import Button from '../components/Button';
 
 function AdminResourcesPage() {
+  const [resources, setResources] = useState([]);
+
+  useEffect(() => {
+    getResources().then((data) => {
+      setResources(data);
+    });
+  }, []);
   return (
     <main className="admin-page">
       <header className="page-header">

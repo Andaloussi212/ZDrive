@@ -1,7 +1,25 @@
 import { Link } from 'react-router-dom';
-import { semesters, subjects, resources } from '../data/mockData';
+import { useEffect, useState } from 'react';
+import { getSemesters, getSubjects, getResources } from '../services/Api';
 
 function AdminDashboardPage() {
+  const [semesters, setSemesters] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [resources, setResources] = useState([]);
+
+  useEffect(() => {
+    getSemesters().then((data) => {
+      setSemesters(data);
+    });
+
+    getSubjects().then((data) => {
+      setSubjects(data);
+    });
+
+    getResources().then((data) => {
+      setResources(data);
+    });
+  }, []);
   return (
     <main className="admin-page">
       <header className="page-header">
