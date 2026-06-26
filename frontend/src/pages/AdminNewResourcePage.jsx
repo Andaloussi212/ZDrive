@@ -1,7 +1,32 @@
 import Button from '../components/Button';
 import { semesters, subjects } from '../data/mockData';
+import { useState } from 'react';
 
 function AdminNewResourcePage() {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    semesterId: semesters[0]?.id || '',
+    subjectId: subjects[0]?.id || '',
+    type: 'COURS',
+    file: null,
+  });
+
+  function handleChange(event) {
+    const { id, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  }
+
+  function handleFileChange(event) {
+    setFormData({
+      ...formData,
+      file: event.target.files[0],
+    });
+  }
   return (
     <main className="admin-page">
       <header className="page-header">
@@ -16,6 +41,8 @@ function AdminNewResourcePage() {
             <input
               type="text"
               id="title"
+              value={formData.title}
+              onChange={handleChange}
               placeholder="Ex : Fiche de révision Java"
             />
           </div>
@@ -24,13 +51,19 @@ function AdminNewResourcePage() {
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
+              value={formData.description}
+              onChange={handleChange}
               placeholder="courte description de la ressource"
             ></textarea>
           </div>
 
           <div className="form-group">
-            <label htmlFor="semester">Semestre</label>
-            <select id="semester">
+            <label htmlFor="semesterId">Semestre</label>
+            <select
+              id="semesterId"
+              value={formData.semesterId}
+              onChange={handleChange}
+            >
               {semesters.map((semester) => (
                 <option key={semester.id} value={semester.id}>
                   {semester.name}
@@ -40,8 +73,12 @@ function AdminNewResourcePage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="subject">Matière</label>
-            <select id="subject">
+            <label htmlFor="subjectId">Matière</label>
+            <select
+              id="subjectId"
+              value={formData.subjectId}
+              onChange={handleChange}
+            >
               {subjects.map((subject) => (
                 <option key={subject.id} value={subject.id}>
                   {subject.name}
@@ -51,7 +88,7 @@ function AdminNewResourcePage() {
           </div>
           <div className="form-group">
             <label htmlFor="type">Type de ressource</label>
-            <select id="type">
+            <select id="type" value={formData.type} onChange={handleChange}>
               <option>COURS</option>
               <option>TD</option>
               <option>TP</option>
@@ -63,7 +100,7 @@ function AdminNewResourcePage() {
 
           <div className="form-group">
             <label htmlFor="file">Fichier</label>
-            <input type="file" id="file" />
+            <input type="file" id="file" onChange={handleFileChange} />
           </div>
 
           <Button text="Ajouter la ressource" />
