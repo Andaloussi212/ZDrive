@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import { semesters, subjects } from '../data/mockData';
 
 function AdminNewResourcePage() {
   return (
@@ -30,26 +31,28 @@ function AdminNewResourcePage() {
           <div className="form-group">
             <label htmlFor="semester">Semestre</label>
             <select id="semester">
-              <option>Semestre 1</option>
-              <option>Semestre 2</option>
-              <option>Semestre 3</option>
-              <option>Semestre 4</option>
-              <option>Semestre 5</option>
-              <option>Semestre 6</option>
+              {semesters.map((semester) => (
+                <option key={semester.id} value={semester.id}>
+                  {semester.name}
+                </option>
+              ))}
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="subject">Matière</label>
             <select id="subject">
-              <option>Bases de la programmation</option>
-              <option>Conception Objet</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-group">
             <label htmlFor="type">Type de ressource</label>
             <select id="type">
-              <option>COURSE</option>
+              <option>COURS</option>
               <option>TD</option>
               <option>TP</option>
               <option>FICHE</option>

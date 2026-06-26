@@ -11,6 +11,12 @@ export const semesters = [
     year: '2025-2026',
     description: 'Ressources du second semestre',
   },
+  {
+    id: 3,
+    name: 'Semestre 3',
+    year: '2026-2027',
+    description: 'Ressources du troisième semestre',
+  },
 ];
 
 export const subjects = [
