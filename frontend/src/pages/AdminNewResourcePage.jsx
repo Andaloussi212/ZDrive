@@ -12,8 +12,37 @@ function AdminNewResourcePage() {
     file: null,
   });
 
+  const filteredSubjects = subjects.filter(
+    (subject) => subject.semesterId === Number(formData.semesterId)
+  );
+
   function handleChange(event) {
     const { id, value } = event.target;
+
+    if (id === 'semesterId') {
+      const newSemesterId = Number(value);
+
+      const subjectsForSemester = subjects.filter(
+        (subject) => subject.semesterId === newSemesterId
+      );
+
+      setFormData({
+        ...formData,
+        semesterId: newSemesterId,
+        subjectId: subjectsForSemester[0]?.id || '',
+      });
+
+      return;
+    }
+
+    if (id === 'subjectId') {
+      setFormData({
+        ...formData,
+        subjectId: Number(value),
+      });
+
+      return;
+    }
 
     setFormData({
       ...formData,
@@ -90,7 +119,7 @@ function AdminNewResourcePage() {
               value={formData.subjectId}
               onChange={handleChange}
             >
-              {subjects.map((subject) => (
+              {filteredSubjects.map((subject) => (
                 <option key={subject.id} value={subject.id}>
                   {subject.name}
                 </option>
