@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react';
-import { getResources } from '../services/Api';
+import { getResources, deleteResource } from '../services/Api';
 import Button from '../components/Button';
 
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
+
+  function handleDelete(id) {
+    deleteResource(id).then((message) => {
+      alert(message);
+
+      getResources().then((data) => {
+        setResources(data);
+      });
+    });
+  }
 
   useEffect(() => {
     getResources().then((data) => {
@@ -36,7 +46,13 @@ function AdminResourcesPage() {
                 <td>{resource.format}</td>
                 <td className="admin-table-actions">
                   <Button text="Modifier" variant="secondary" />
-                  <Button text="Supprimer" variant="danger" />
+                  <button
+                    type="button"
+                    className="button button-danger"
+                    onClick={() => handleDelete(resource.id)}
+                  >
+                    Supprimer
+                  </button>
                 </td>
               </tr>
             ))}

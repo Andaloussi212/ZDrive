@@ -26,3 +26,11 @@ export async function createResource(resourceData) {
 
   return response.text();
 }
+
+export async function deleteResource(id) {
+  const response = await fetch(`${API_BASE_URL}/resources/${id}`, {
+    method: 'DELETE',
+  });
+
+  return response.text();
+}
