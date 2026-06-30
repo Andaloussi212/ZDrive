@@ -1,11 +1,11 @@
 package com.zdrive.backend.model;
 
 public class Resource {
-  private long id;
+  private Long id;
   private String title;
   private String type;
   private String format;
-  private long subjectId;
+  private Long subjectId;
 
   public Resource(long i, String t, String ty, String f, long s) {
     this.id = i;
@@ -15,7 +15,7 @@ public class Resource {
     this.subjectId = s;
   }
 
-  public long getId() {
+  public Long getId() {
     return this.id;
   }
 
@@ -31,7 +31,7 @@ public class Resource {
     return this.format;
   }
 
-  public long getSubjectId() {
+  public Long getSubjectId() {
     return this.subjectId;
   }
 }

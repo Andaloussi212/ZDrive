@@ -3,7 +3,9 @@ package com.zdrive.backend.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,4 +44,14 @@ public class ResourceController {
 
         return "Ressource ajoutée";
     }
+    @DeleteMapping("/api/resources/{id}")
+    public String deleteResource(@PathVariable Long id) {
+      boolean removed = resources.removeIf((resource) -> resource.getId().equals(id));
+
+      if (removed) {
+        return "Ressource supprimée";
+    }
+
+    return "Ressource introuvable";
+  }
 }
