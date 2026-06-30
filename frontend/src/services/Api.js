@@ -14,3 +14,15 @@ export async function getResources() {
   const response = await fetch(`${API_BASE_URL}/resources`);
   return response.json();
 }
+
+export async function createResource(resourceData) {
+  const response = await fetch(`${API_BASE_URL}/resources`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(resourceData),
+  });
+
+  return response.text();
+}

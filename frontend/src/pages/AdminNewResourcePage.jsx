@@ -1,6 +1,6 @@
 import Button from '../components/Button';
 import { resourceTypes } from '../data/mockData';
-import { getSemesters, getSubjects } from '../services/Api';
+import { getSemesters, getSubjects, createResource } from '../services/Api';
 import { useEffect, useState } from 'react';
 
 function AdminNewResourcePage() {
@@ -92,8 +92,16 @@ function AdminNewResourcePage() {
       alert('Le titre est obligatoire');
       return;
     }
+    const resourceData = {
+      title: formData.title,
+      description: formData.description,
+      type: formData.type,
+      subjectId: formData.subjectId,
+    };
 
-    console.log('Nouvelle ressource : ', formData);
+    createResource(resourceData).then((message) => {
+      alert(message);
+    });
   }
   return (
     <main className="admin-page">
