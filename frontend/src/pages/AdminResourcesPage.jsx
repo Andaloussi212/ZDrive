@@ -46,13 +46,11 @@ function AdminResourcesPage() {
                 <td>{resource.format}</td>
                 <td className="admin-table-actions">
                   <Button text="Modifier" variant="secondary" />
-                  <button
-                    type="button"
-                    className="button button-danger"
+                  <Button
+                    text="Supprimer"
+                    variant="danger"
                     onClick={() => handleDelete(resource.id)}
-                  >
-                    Supprimer
-                  </button>
+                  />
                 </td>
               </tr>
             ))}
