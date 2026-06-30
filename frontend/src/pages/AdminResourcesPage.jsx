@@ -6,6 +6,14 @@ function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
 
   function handleDelete(id) {
+    const confirmed = window.confirm(
+      'Voulez-vous vraiment supprimer cette ressource ?'
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     deleteResource(id).then((message) => {
       alert(message);
 
