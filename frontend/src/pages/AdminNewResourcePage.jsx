@@ -2,8 +2,10 @@ import Button from '../components/Button';
 import { resourceTypes } from '../data/mockData';
 import { getSemesters, getSubjects, createResource } from '../services/Api';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AdminNewResourcePage() {
+  const navigate = useNavigate();
   const [semesters, setSemesters] = useState([]);
   const [subjects, setSubjects] = useState([]);
 
@@ -101,6 +103,7 @@ function AdminNewResourcePage() {
 
     createResource(resourceData).then((message) => {
       alert(message);
+      navigate('/admin/resources');
     });
   }
   return (
