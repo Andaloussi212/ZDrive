@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getResources, deleteResource } from '../services/Api';
 import Button from '../components/Button';
 
@@ -53,7 +54,12 @@ function AdminResourcesPage() {
                 <td>{resource.type}</td>
                 <td>{resource.format}</td>
                 <td className="admin-table-actions">
-                  <Button text="Modifier" variant="secondary" />
+                  <Link
+                    to={`/admin/resources/${resource.id}/edit`}
+                    className="button button-secondary"
+                  >
+                    Modifier
+                  </Link>
                   <Button
                     text="Supprimer"
                     variant="danger"

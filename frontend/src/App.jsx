@@ -11,6 +11,7 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminResourcesPage from './pages/AdminResourcesPage';
 import AdminNewResourcePage from './pages/AdminNewResourcePage';
 import AdminSettingsPage from './pages/AdminSettingsPage';
+import AdminEditResourcePage from './pages/AdminEditResourcePage';
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
         <Route path="/admin/resources" element={<AdminResourcesPage />} />
         <Route path="/admin/resources/new" element={<AdminNewResourcePage />} />
         <Route path="/admin/settings" element={<AdminSettingsPage />} />
+        <Route
+          path="/admin/resources/:resourceId/edit"
+          element={<AdminEditResourcePage />}
+        />
       </Routes>
     </BrowserRouter>
   );
