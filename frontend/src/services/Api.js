@@ -34,3 +34,15 @@ export async function deleteResource(id) {
 
   return response.text();
 }
+
+export async function updateResource(id, resourceData) {
+  const response = await fetch(`${API_BASE_URL}/resources/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(resourceData),
+  });
+
+  return response.text();
+}

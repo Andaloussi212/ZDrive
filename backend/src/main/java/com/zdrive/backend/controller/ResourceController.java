@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zdrive.backend.model.CreateResourceRequest;
 import com.zdrive.backend.model.Resource;
+import com.zdrive.backend.model.UpdateResourceRequest;
 
 @RestController
 public class ResourceController {
@@ -54,4 +56,23 @@ public class ResourceController {
 
     return "Ressource introuvable";
   }
+
+  @PutMapping("/api/resources/{id}")
+public String updateResource(
+        @PathVariable Long id,
+        @RequestBody UpdateResourceRequest request
+) {
+    for (Resource resource : resources) {
+        if (resource.getId().equals(id)) {
+            resource.setTitle(request.getTitle());
+            resource.setType(request.getType());
+            resource.setFormat(request.getFormat());
+            resource.setSubjectId(request.getSubjectId());
+
+            return "Ressource modifiée";
+        }
+    }
+
+    return "Ressource introuvable";
+}
 }

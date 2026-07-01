@@ -7,12 +7,12 @@ public class Resource {
   private String format;
   private Long subjectId;
 
-  public Resource(long i, String t, String ty, String f, long s) {
-    this.id = i;
-    this.title = t;
-    this.type = ty;
-    this.format = f;
-    this.subjectId = s;
+  public Resource(Long id, String title, String type, String format, Long subjectId) {
+    this.id = id;
+    this.title = title;
+    this.type = type;
+    this.format = format;
+    this.subjectId = subjectId;
   }
 
   public Long getId() {
@@ -34,4 +34,20 @@ public class Resource {
   public Long getSubjectId() {
     return this.subjectId;
   }
+
+  public void setTitle(String title) {
+    this.title = title;
+}
+
+public void setType(String type) {
+    this.type = type;
+}
+
+public void setFormat(String format) {
+    this.format = format;
+}
+
+public void setSubjectId(Long subjectId) {
+    this.subjectId = subjectId;
+}
 }

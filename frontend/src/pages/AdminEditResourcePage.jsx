@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getResources } from '../services/Api';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getResources, updateResource } from '../services/Api';
 import Button from '../components/Button';
 
 function AdminEditResourcePage() {
   const { resourceId } = useParams();
   const selectedResourceId = Number(resourceId);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: '',
@@ -43,7 +44,17 @@ function AdminEditResourcePage() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log('Ressource modifiée : ', formData);
+    const resourceData = {
+      title: formData.title,
+      type: formData.type,
+      format: formData.format,
+      subjectId: formData.subjectId,
+    };
+
+    updateResource(selectedResourceId, resourceData).then((message) => {
+      alert(message);
+      navigate('/admin/resources');
+    });
   }
 
   return (
