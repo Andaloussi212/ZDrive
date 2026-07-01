@@ -1,7 +1,50 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getResources } from '../services/Api';
+import Button from '../components/Button';
 
 function AdminEditResourcePage() {
   const { resourceId } = useParams();
+  const selectedResourceId = Number(resourceId);
+
+  const [formData, setFormData] = useState({
+    title: '',
+    type: '',
+    format: '',
+    subjectId: '',
+  });
+
+  useEffect(() => {
+    getResources().then((data) => {
+      const selectedResource = data.find(
+        (resource) => resource.id === selectedResourceId
+      );
+
+      if (selectedResource) {
+        setFormData({
+          title: selectedResource.title,
+          type: selectedResource.type,
+          format: selectedResource.format,
+          subjectId: selectedResource.subjectId,
+        });
+      }
+    });
+  }, [selectedResourceId]);
+
+  function handleChange(event) {
+    const { id, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log('Ressource modifiée : ', formData);
+  }
 
   return (
     <main className="admin-page">
@@ -11,7 +54,39 @@ function AdminEditResourcePage() {
       </header>
 
       <section className="admin-form-card">
-        <p>Formulaire de modification à venir.</p>
+        <form className="admin-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="title">Titre</label>
+            <input
+              type="text"
+              id="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="type">Type</label>
+            <input
+              type="text"
+              id="type"
+              value={formData.type}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="format">Format</label>
+            <input
+              type="text"
+              id="format"
+              value={formData.format}
+              onChange={handleChange}
+            />
+          </div>
+
+          <Button text="Enregistrer les modifications" type="submit" />
+        </form>
       </section>
     </main>
   );
