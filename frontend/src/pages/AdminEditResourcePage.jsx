@@ -16,22 +16,33 @@ function AdminEditResourcePage() {
     subjectId: '',
   });
 
-  useEffect(() => {
-    getResources().then((data) => {
-      const selectedResource = data.find(
-        (resource) => resource.id === selectedResourceId
-      );
+  const [error, setError] = useState('');
 
-      if (selectedResource) {
-        setFormData({
-          title: selectedResource.title,
-          description: selectedResource.description || '',
-          type: selectedResource.type,
-          format: selectedResource.format,
-          subjectId: selectedResource.subjectId,
-        });
-      }
-    });
+  useEffect(() => {
+    getResources()
+      .then((data) => {
+        const selectedResource = data.find(
+          (resource) => resource.id === selectedResourceId
+        );
+
+        if (selectedResource) {
+          setFormData({
+            title: selectedResource.title,
+            description: selectedResource.description || '',
+            type: selectedResource.type,
+            format: selectedResource.format,
+            subjectId: selectedResource.subjectId,
+          });
+          setError('');
+        } else {
+          setError('Ressource introuvable.');
+        }
+      })
+      .catch(() => {
+        setError(
+          'Impossible de charger la ressource. Vérifie que le backend est lancé.'
+        );
+      });
   }, [selectedResourceId]);
 
   function handleChange(event) {
@@ -67,50 +78,54 @@ function AdminEditResourcePage() {
         <p>Modification de la ressource numéro {resourceId}.</p>
       </header>
 
-      <section className="admin-form-card">
-        <form className="admin-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="title">Titre</label>
-            <input
-              type="text"
-              id="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </div>
+      {error && <p className="empty-message">{error}</p>}
 
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              value={formData.description}
-              onChange={handleChange}
-            ></textarea>
-          </div>
+      {!error && (
+        <section className="admin-form-card">
+          <form className="admin-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="title">Titre</label>
+              <input
+                type="text"
+                id="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <input
-              type="text"
-              id="type"
-              value={formData.type}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+              ></textarea>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="format">Format</label>
-            <input
-              type="text"
-              id="format"
-              value={formData.format}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="type">Type</label>
+              <input
+                type="text"
+                id="type"
+                value={formData.type}
+                onChange={handleChange}
+              />
+            </div>
 
-          <Button text="Enregistrer les modifications" type="submit" />
-        </form>
-      </section>
+            <div className="form-group">
+              <label htmlFor="format">Format</label>
+              <input
+                type="text"
+                id="format"
+                value={formData.format}
+                onChange={handleChange}
+              />
+            </div>
+
+            <Button text="Enregistrer les modifications" type="submit" />
+          </form>
+        </section>
+      )}
     </main>
   );
 }
