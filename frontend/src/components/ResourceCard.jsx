@@ -3,6 +3,9 @@ function ResourceCard({ resource }) {
   return (
     <article className="resource-card">
       <h2>{resource.title}</h2>
+
+      {resource.description && <p>{resource.description}</p>}
+
       <div className="resource-meta">
         <span className="resource-badge">{resource.type}</span>
         <span className="resource-badge">{resource.format}</span>

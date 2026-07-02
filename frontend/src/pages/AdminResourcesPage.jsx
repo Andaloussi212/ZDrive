@@ -41,6 +41,7 @@ function AdminResourcesPage() {
           <thead>
             <tr>
               <th>Titre</th>
+              <th>Description</th>
               <th>Type</th>
               <th>Format</th>
               <th>Actions</th>
@@ -51,6 +52,7 @@ function AdminResourcesPage() {
             {resources.map((resource) => (
               <tr key={resource.id}>
                 <td>{resource.title}</td>
+                <td>{resource.description || '—'}</td>
                 <td>{resource.type}</td>
                 <td>{resource.format}</td>
                 <td className="admin-table-actions">
