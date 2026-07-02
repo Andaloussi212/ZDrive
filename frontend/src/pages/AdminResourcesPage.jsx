@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getResources, deleteResource } from '../services/Api';
 import Button from '../components/Button';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
@@ -32,9 +33,7 @@ function AdminResourcesPage() {
         setError('');
       })
       .catch(() => {
-        setError(
-          'Impossible de charger les ressources. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.resources);
       });
   }, []);
   return (

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SubjectCard from '../components/SubjectCard';
 import { useParams, Link } from 'react-router-dom';
 import { getSemesters, getSubjects } from '../services/Api';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function SubjectsPage() {
   const { semesterId } = useParams();
@@ -19,17 +20,12 @@ function SubjectsPage() {
         setError('');
       })
       .catch(() => {
-        setError(
-          'Impossible de charger les matières. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.subjects);
       });
   }, [selectedSemesterId]);
 
   const selectedSemester = semesters.find(
     (semester) => semester.id === selectedSemesterId
-  );
-  const filteredSubjects = subjects.filter(
-    (subject) => subject.semesterId === selectedSemesterId
   );
   return (
     <main className="subjects-page">

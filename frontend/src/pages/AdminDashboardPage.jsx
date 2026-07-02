@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSemesters, getSubjects, getResources } from '../services/Api';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function AdminDashboardPage() {
   const [semesters, setSemesters] = useState([]);
@@ -17,9 +18,7 @@ function AdminDashboardPage() {
         setError('');
       })
       .catch(() => {
-        setError(
-          'Impossible de charger le tableau de bord. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.dashboard);
       });
   }, []);
   return (

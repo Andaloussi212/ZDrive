@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SemesterCard from '../components/SemesterCard';
 import { getSemesters } from '../services/Api';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function SemestersPage() {
   const [semesters, setSemesters] = useState([]);
@@ -13,9 +14,7 @@ function SemestersPage() {
         setError('');
       })
       .catch(() => {
-        setError(
-          'Impossible de charger les semestres. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.semesters);
       });
   }, []);
   return (

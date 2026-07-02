@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ResourceCard from '../components/ResourceCard';
 import { useParams, Link } from 'react-router-dom';
 import { getSubjects, getResources } from '../services/Api';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function ResourcesPage() {
   const { subjectId } = useParams();
@@ -19,9 +20,7 @@ function ResourcesPage() {
         setError('');
       })
       .catch(() => {
-        setError(
-          'Impossible de charger les ressources. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.resources);
       });
   }, [selectedSubjectId]);
 

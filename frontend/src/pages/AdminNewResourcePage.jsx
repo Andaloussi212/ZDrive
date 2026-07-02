@@ -3,6 +3,7 @@ import { resourceTypes } from '../constants/resourceTypes';
 import { getSemesters, getSubjects, createResource } from '../services/Api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function AdminNewResourcePage() {
   const navigate = useNavigate();
@@ -42,9 +43,7 @@ function AdminNewResourcePage() {
         }
       })
       .catch(() => {
-        setError(
-          'Impossible de charger le formulaire. Vérifie que le backend est lancé.'
-        );
+        setError(ERROR_MESSAGES.form);
       });
   }, []);
 
