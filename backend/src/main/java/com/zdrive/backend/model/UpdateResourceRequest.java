@@ -5,6 +5,7 @@ public class UpdateResourceRequest {
   private String type;
   private String format;
   private Long subjectId;
+  private String description;
 
   public String getTitle() {
     return this.title;
@@ -20,6 +21,10 @@ public class UpdateResourceRequest {
 
   public Long getSubjectId() {
     return this.subjectId;
+  }
+
+  public String getDescription() {
+    return description;
   }
 }
 

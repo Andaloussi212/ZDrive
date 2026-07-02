@@ -25,6 +25,7 @@ public class ResourceService {
     public String createResource(CreateResourceRequest request) {
         Resource newResource = new Resource(
             request.getTitle(),
+            request.getDescription(),
             request.getType(),
             request.getFormat(),
             request.getSubjectId()
@@ -53,6 +54,7 @@ public class ResourceService {
         }
 
         resource.setTitle(request.getTitle());
+        resource.setDescription(request.getDescription());
         resource.setType(request.getType());
         resource.setFormat(request.getFormat());
         resource.setSubjectId(request.getSubjectId());

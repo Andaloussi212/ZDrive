@@ -10,6 +10,7 @@ function AdminEditResourcePage() {
 
   const [formData, setFormData] = useState({
     title: '',
+    description: '',
     type: '',
     format: '',
     subjectId: '',
@@ -24,6 +25,7 @@ function AdminEditResourcePage() {
       if (selectedResource) {
         setFormData({
           title: selectedResource.title,
+          description: selectedResource.description || '',
           type: selectedResource.type,
           format: selectedResource.format,
           subjectId: selectedResource.subjectId,
@@ -46,6 +48,7 @@ function AdminEditResourcePage() {
 
     const resourceData = {
       title: formData.title,
+      description: formData.description,
       type: formData.type,
       format: formData.format,
       subjectId: formData.subjectId,
@@ -74,6 +77,15 @@ function AdminEditResourcePage() {
               value={formData.title}
               onChange={handleChange}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={formData.description}
+              onChange={handleChange}
+            ></textarea>
           </div>
 
           <div className="form-group">

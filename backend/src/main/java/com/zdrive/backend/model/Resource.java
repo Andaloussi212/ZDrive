@@ -15,20 +15,23 @@ public class Resource {
     private String type;
     private String format;
     private Long subjectId;
+    private String description;
 
     public Resource() {
     }
 
-    public Resource(Long id, String title, String type, String format, Long subjectId) {
+    public Resource(Long id, String title, String description, String type, String format, Long subjectId) {
         this.id = id;
         this.title = title;
+        this.description = description;
         this.type = type;
         this.format = format;
         this.subjectId = subjectId;
     }
 
-    public Resource(String title, String type, String format, Long subjectId) {
+    public Resource(String title, String description, String type, String format, Long subjectId) {
         this.title = title;
+        this.description = description;
         this.type = type;
         this.format = format;
         this.subjectId = subjectId;
@@ -54,6 +57,10 @@ public class Resource {
         return this.subjectId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -68,5 +75,9 @@ public class Resource {
 
     public void setSubjectId(Long subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
