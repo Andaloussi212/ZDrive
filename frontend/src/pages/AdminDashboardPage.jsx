@@ -6,19 +6,21 @@ function AdminDashboardPage() {
   const [semesters, setSemesters] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [resources, setResources] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    getSemesters().then((data) => {
-      setSemesters(data);
-    });
-
-    getSubjects().then((data) => {
-      setSubjects(data);
-    });
-
-    getResources().then((data) => {
-      setResources(data);
-    });
+    Promise.all([getSemesters(), getSubjects(), getResources()])
+      .then(([semestersData, subjectsData, resourcesData]) => {
+        setSemesters(semestersData);
+        setSubjects(subjectsData);
+        setResources(resourcesData);
+        setError('');
+      })
+      .catch(() => {
+        setError(
+          'Impossible de charger le tableau de bord. Vérifie que le backend est lancé.'
+        );
+      });
   }, []);
   return (
     <main className="admin-page">
@@ -27,28 +29,34 @@ function AdminDashboardPage() {
         <p>Résumé de la plateforme ZDrive</p>
       </header>
 
-      <section className="admin-stats">
-        <article className="admin-stat-card">
-          <span>Semestres</span>
-          <strong>{semesters.length}</strong>
-        </article>
+      {error && <p className="empty-message">{error}</p>}
 
-        <article className="admin-stat-card">
-          <span>Matières</span>
-          <strong>{subjects.length}</strong>
-        </article>
+      {!error && (
+        <>
+          <section className="admin-stats">
+            <article className="admin-stat-card">
+              <span>Semestres</span>
+              <strong>{semesters.length}</strong>
+            </article>
 
-        <article className="admin-stat-card">
-          <span>Ressources</span>
-          <strong>{resources.length}</strong>
-        </article>
-      </section>
+            <article className="admin-stat-card">
+              <span>Matières</span>
+              <strong>{subjects.length}</strong>
+            </article>
 
-      <section className="admin-actions">
-        <Link to="/admin/resources">Gérer les ressources</Link>
-        <Link to="/admin/resources/new">Ajouter une ressource</Link>
-        <Link to="/admin/settings">Paramètres</Link>
-      </section>
+            <article className="admin-stat-card">
+              <span>Ressources</span>
+              <strong>{resources.length}</strong>
+            </article>
+          </section>
+
+          <section className="admin-actions">
+            <Link to="/admin/resources">Gérer les ressources</Link>
+            <Link to="/admin/resources/new">Ajouter une ressource</Link>
+            <Link to="/admin/settings">Paramètres</Link>
+          </section>
+        </>
+      )}
     </main>
   );
 }
