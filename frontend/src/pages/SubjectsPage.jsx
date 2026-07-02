@@ -15,10 +15,10 @@ function SubjectsPage() {
       setSemesters(data);
     });
 
-    getSubjects().then((data) => {
+    getSubjects(selectedSemesterId).then((data) => {
       setSubjects(data);
     });
-  }, []);
+  }, [selectedSemesterId]);
 
   const selectedSemester = semesters.find(
     (semester) => semester.id === selectedSemesterId
@@ -38,9 +38,9 @@ function SubjectsPage() {
         <p>Liste des matières disponibles pour ce semestre</p>
       </header>
 
-      {filteredSubjects.length > 0 ? (
+      {subjects.length > 0 ? (
         <section className="subjects-grid">
-          {filteredSubjects.map((subject) => (
+          {subjects.map((subject) => (
             <SubjectCard key={subject.id} subject={subject} />
           ))}
         </section>

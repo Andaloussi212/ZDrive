@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zdrive.backend.model.CreateResourceRequest;
@@ -25,7 +26,11 @@ public class ResourceController {
     }
 
     @GetMapping("/api/resources")
-    public List<Resource> getResources() {
+    public List<Resource> getResources(@RequestParam(required = false) Long subjectId) {
+        if (subjectId != null) {
+            return resourceService.getResourcesBySubjectId(subjectId);
+        }
+
         return resourceService.getResources();
     }
 

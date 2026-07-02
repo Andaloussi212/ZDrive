@@ -19,4 +19,8 @@ public class SubjectService {
     public List<Subject> getSubjects() {
         return subjectRepository.findAll();
     }
+
+    public List<Subject> getSubjectsBySemesterId(Long semesterId) {
+        return subjectRepository.findBySemesterId(semesterId);
+    }
 }

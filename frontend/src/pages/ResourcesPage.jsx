@@ -15,17 +15,15 @@ function ResourcesPage() {
       setSubjects(data);
     });
 
-    getResources().then((data) => {
+    getResources(selectedSubjectId).then((data) => {
       setResources(data);
     });
-  }, []);
+  }, [selectedSubjectId]);
 
   const selectedSubject = subjects.find(
     (subject) => subject.id === selectedSubjectId
   );
-  const filteredResources = resources.filter(
-    (resource) => resource.subjectId === selectedSubjectId
-  );
+
   return (
     <main className="resources-page">
       <header className="page-header">
@@ -44,9 +42,9 @@ function ResourcesPage() {
         </h1>
         <p>Liste des fichiers disponibles pour cette matière</p>
       </header>
-      {filteredResources.length > 0 ? (
+      {resources.length > 0 ? (
         <section className="resources-grid">
-          {filteredResources.map((resource) => (
+          {resources.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
           ))}
         </section>

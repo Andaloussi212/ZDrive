@@ -61,4 +61,8 @@ public class ResourceService {
 
         return "Ressource modifiée";
     }
+
+    public List<Resource> getResourcesBySubjectId(Long subjectId) {
+        return resourceRepository.findBySubjectId(subjectId);
+    }
 }

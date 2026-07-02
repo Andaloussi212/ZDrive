@@ -5,13 +5,21 @@ export async function getSemesters() {
   return response.json();
 }
 
-export async function getSubjects() {
-  const response = await fetch(`${API_BASE_URL}/subjects`);
+export async function getSubjects(semesterId) {
+  const url = semesterId
+    ? `${API_BASE_URL}/subjects?semesterId=${semesterId}`
+    : `${API_BASE_URL}/subjects`;
+
+  const response = await fetch(url);
   return response.json();
 }
 
-export async function getResources() {
-  const response = await fetch(`${API_BASE_URL}/resources`);
+export async function getResources(subjectId) {
+  const url = subjectId
+    ? `${API_BASE_URL}/resources?subjectId=${subjectId}`
+    : `${API_BASE_URL}/resources`;
+
+  const response = await fetch(url);
   return response.json();
 }
 
