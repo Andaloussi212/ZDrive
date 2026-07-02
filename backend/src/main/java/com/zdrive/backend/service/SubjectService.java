@@ -5,16 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.zdrive.backend.model.Subject;
+import com.zdrive.backend.repository.SubjectRepository;
 
 @Service
 public class SubjectService {
 
-    private final List<Subject> subjects = List.of(
-            new Subject(1L, "Bases de la programmation", 1L),
-            new Subject(2L, "Conception Orienté Objet", 2L)
-    );
+    private final SubjectRepository subjectRepository;
+
+    public SubjectService(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 
     public List<Subject> getSubjects() {
-        return subjects;
+        return subjectRepository.findAll();
     }
 }

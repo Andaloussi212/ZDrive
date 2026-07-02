@@ -1,26 +1,42 @@
 package com.zdrive.backend.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Subject {
-  private long id;
-  private String name;
-  private long semesterId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  public Subject(long i, String n, long s) {
-    this.id = i;
-    this.name = n;
-    this.semesterId = s;
-  }
+    private String name;
+    private Long semesterId;
 
-  public long getId() {
-    return this.id;
-  }
+    public Subject() {
+    }
 
-  public String getName() {
-    return this.name;
-  }
+    public Subject(Long id, String name, Long semesterId) {
+        this.id = id;
+        this.name = name;
+        this.semesterId = semesterId;
+    }
 
-  public long getSemesterId() {
-    return this.semesterId;
-  }
+    public Subject(String name, Long semesterId) {
+        this.name = name;
+        this.semesterId = semesterId;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getSemesterId() {
+        return semesterId;
+    }
 }
