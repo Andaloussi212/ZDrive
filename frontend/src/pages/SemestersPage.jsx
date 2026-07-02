@@ -1,14 +1,21 @@
-import SemesterCard from '../components/SemesterCard';
 import { useEffect, useState } from 'react';
+import SemesterCard from '../components/SemesterCard';
+import { getSemesters } from '../services/Api';
 
 function SemestersPage() {
   const [semesters, setSemesters] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/semesters')
-      .then((response) => response.json())
+    getSemesters()
       .then((data) => {
         setSemesters(data);
+        setError('');
+      })
+      .catch(() => {
+        setError(
+          'Impossible de charger les semestres. Vérifie que le backend est lancé.'
+        );
       });
   }, []);
   return (
@@ -17,15 +24,19 @@ function SemestersPage() {
         <h1>Semestres</h1>
         <p>
           Choisis un semestre pour consulter les matières et les ressources
-          associées
+          associées.
         </p>
       </header>
 
-      <section className="semesters-grid">
-        {semesters.map((semester) => (
-          <SemesterCard key={semester.id} semester={semester} />
-        ))}
-      </section>
+      {error && <p className="empty-message">{error}</p>}
+
+      {!error && (
+        <section className="semesters-grid">
+          {semesters.map((semester) => (
+            <SemesterCard key={semester.id} semester={semester} />
+          ))}
+        </section>
+      )}
     </main>
   );
 }

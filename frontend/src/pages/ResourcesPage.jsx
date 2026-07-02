@@ -9,15 +9,20 @@ function ResourcesPage() {
 
   const [subjects, setSubjects] = useState([]);
   const [resources, setResources] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    getSubjects().then((data) => {
-      setSubjects(data);
-    });
-
-    getResources(selectedSubjectId).then((data) => {
-      setResources(data);
-    });
+    Promise.all([getSubjects(), getResources(selectedSubjectId)])
+      .then(([subjectsData, resourcesData]) => {
+        setSubjects(subjectsData);
+        setResources(resourcesData);
+        setError('');
+      })
+      .catch(() => {
+        setError(
+          'Impossible de charger les ressources. Vérifie que le backend est lancé.'
+        );
+      });
   }, [selectedSubjectId]);
 
   const selectedSubject = subjects.find(
@@ -42,16 +47,21 @@ function ResourcesPage() {
         </h1>
         <p>Liste des fichiers disponibles pour cette matière</p>
       </header>
-      {resources.length > 0 ? (
+
+      {error && <p className="empty-message">{error}</p>}
+
+      {!error && resources.length > 0 ? (
         <section className="resources-grid">
           {resources.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
           ))}
         </section>
       ) : (
-        <p className="empty-message">
-          Aucune ressource disponible pour cette matière.
-        </p>
+        !error && (
+          <p className="empty-message">
+            Aucune ressource disponible pour cette matière.
+          </p>
+        )
       )}
     </main>
   );
