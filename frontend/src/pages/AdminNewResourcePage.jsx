@@ -1,5 +1,5 @@
 import Button from '../components/Button';
-import { resourceTypes } from '../data/mockData';
+import { resourceTypes } from '../constants/resourceTypes';
 import { getSemesters, getSubjects, createResource } from '../services/Api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
