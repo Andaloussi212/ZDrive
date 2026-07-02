@@ -15,6 +15,7 @@ function AdminNewResourcePage() {
     semesterId: '',
     subjectId: '',
     type: 'COURS',
+    format: '',
     file: null,
   });
 
@@ -80,10 +81,41 @@ function AdminNewResourcePage() {
     });
   }
 
+  function getFileFormat(fileName) {
+    const extension = fileName.split('.').pop().toUpperCase();
+
+    if (extension === 'PDF') {
+      return 'PDF';
+    }
+
+    if (extension === 'PNG') {
+      return 'PNG';
+    }
+
+    if (extension === 'JPG' || extension === 'JPEG') {
+      return 'JPG';
+    }
+
+    if (extension === 'DOCX') {
+      return 'DOCX';
+    }
+
+    return 'OTHER';
+  }
+
   function handleFileChange(event) {
+    const selectedFile = event.target.files[0];
+
+    if (!selectedFile) {
+      return;
+    }
+
+    const detectedFormat = getFileFormat(selectedFile.name);
+
     setFormData({
       ...formData,
-      file: event.target.files[0],
+      file: selectedFile,
+      format: detectedFormat,
     });
   }
 
@@ -98,6 +130,7 @@ function AdminNewResourcePage() {
       title: formData.title,
       description: formData.description,
       type: formData.type,
+      format: formData.format,
       subjectId: formData.subjectId,
     };
 

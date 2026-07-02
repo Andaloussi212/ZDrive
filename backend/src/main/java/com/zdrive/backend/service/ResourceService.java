@@ -24,10 +24,10 @@ public class ResourceService {
 
     public String createResource(CreateResourceRequest request) {
         Resource newResource = new Resource(
-                request.getTitle(),
-                request.getType(),
-                "PDF",
-                request.getSubjectId()
+            request.getTitle(),
+            request.getType(),
+            request.getFormat(),
+            request.getSubjectId()
         );
 
         resourceRepository.save(newResource);
