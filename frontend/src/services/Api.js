@@ -1,8 +1,17 @@
 const API_BASE_URL = 'http://localhost:8080/api';
 
+async function handleResponse(response) {
+  if (!response.ok) {
+    throw new Error('Erreur lors de la communication avec le serveur');
+  }
+
+  return response;
+}
+
 export async function getSemesters() {
   const response = await fetch(`${API_BASE_URL}/semesters`);
-  return response.json();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.json();
 }
 
 export async function getSubjects(semesterId) {
@@ -11,7 +20,8 @@ export async function getSubjects(semesterId) {
     : `${API_BASE_URL}/subjects`;
 
   const response = await fetch(url);
-  return response.json();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.json();
 }
 
 export async function getResources(subjectId) {
@@ -20,7 +30,8 @@ export async function getResources(subjectId) {
     : `${API_BASE_URL}/resources`;
 
   const response = await fetch(url);
-  return response.json();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.json();
 }
 
 export async function createResource(resourceData) {
@@ -32,7 +43,8 @@ export async function createResource(resourceData) {
     body: JSON.stringify(resourceData),
   });
 
-  return response.text();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
 }
 
 export async function deleteResource(id) {
@@ -40,7 +52,8 @@ export async function deleteResource(id) {
     method: 'DELETE',
   });
 
-  return response.text();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
 }
 
 export async function updateResource(id, resourceData) {
@@ -52,5 +65,6 @@ export async function updateResource(id, resourceData) {
     body: JSON.stringify(resourceData),
   });
 
-  return response.text();
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
 }
