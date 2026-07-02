@@ -5,6 +5,7 @@ import Button from '../components/Button';
 
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
+  const [error, setError] = useState('');
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -25,9 +26,16 @@ function AdminResourcesPage() {
   }
 
   useEffect(() => {
-    getResources().then((data) => {
-      setResources(data);
-    });
+    getResources()
+      .then((data) => {
+        setResources(data);
+        setError('');
+      })
+      .catch(() => {
+        setError(
+          'Impossible de charger les ressources. Vérifie que le backend est lancé.'
+        );
+      });
   }, []);
   return (
     <main className="admin-page">
@@ -36,43 +44,47 @@ function AdminResourcesPage() {
         <p>Liste des ressources ajoutées sur ZDrive.</p>
       </header>
 
-      <section className="admin-table-card">
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Titre</th>
-              <th>Description</th>
-              <th>Type</th>
-              <th>Format</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      {error && <p className="empty-message">{error}</p>}
 
-          <tbody>
-            {resources.map((resource) => (
-              <tr key={resource.id}>
-                <td>{resource.title}</td>
-                <td>{resource.description || '—'}</td>
-                <td>{resource.type}</td>
-                <td>{resource.format}</td>
-                <td className="admin-table-actions">
-                  <Link
-                    to={`/admin/resources/${resource.id}/edit`}
-                    className="button button-secondary"
-                  >
-                    Modifier
-                  </Link>
-                  <Button
-                    text="Supprimer"
-                    variant="danger"
-                    onClick={() => handleDelete(resource.id)}
-                  />
-                </td>
+      {!error && (
+        <section className="admin-table-card">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Format</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+            </thead>
+
+            <tbody>
+              {resources.map((resource) => (
+                <tr key={resource.id}>
+                  <td>{resource.title}</td>
+                  <td>{resource.description || '—'}</td>
+                  <td>{resource.type}</td>
+                  <td>{resource.format}</td>
+                  <td className="admin-table-actions">
+                    <Link
+                      to={`/admin/resources/${resource.id}/edit`}
+                      className="button button-secondary"
+                    >
+                      Modifier
+                    </Link>
+                    <Button
+                      text="Supprimer"
+                      variant="danger"
+                      onClick={() => handleDelete(resource.id)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
     </main>
   );
 }
