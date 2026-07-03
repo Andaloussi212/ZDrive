@@ -234,6 +234,12 @@ function AdminNewResourcePage() {
               <label htmlFor="file">Fichier</label>
               <input type="file" id="file" onChange={handleFileChange} />
 
+              {formData.file && (
+                <p className="empty-message">
+                  Fichier sélectionné : {formData.file.name}
+                </p>
+              )}
+
               {formData.format && (
                 <p className="empty-message">
                   Format détecté : {formData.format}
