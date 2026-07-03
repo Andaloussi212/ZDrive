@@ -8,6 +8,7 @@ function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -28,6 +29,8 @@ function AdminResourcesPage() {
   }
 
   useEffect(() => {
+    setLoading(true);
+
     getResources()
       .then((data) => {
         setResources(data);
@@ -35,6 +38,9 @@ function AdminResourcesPage() {
       })
       .catch(() => {
         setError(ERROR_MESSAGES.resources);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
   return (
@@ -46,9 +52,11 @@ function AdminResourcesPage() {
 
       {error && <p className="empty-message">{error}</p>}
 
+      {loading && <p className="empty-message">Chargement des ressources...</p>}
+
       {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
-      {!error && (
+      {!error && !loading && (
         <section className="admin-table-card">
           <table className="admin-table">
             <thead>
