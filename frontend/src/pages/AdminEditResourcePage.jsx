@@ -4,8 +4,7 @@ import { getResources, updateResource } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 import { resourceTypes } from '../constants/resourceTypes';
-
-const resourceFormats = ['PDF', 'PNG', 'JPG', 'DOCX', 'OTHER'];
+import { resourceFormats } from '../constants/resourceFormats';
 
 function AdminEditResourcePage() {
   const { resourceId } = useParams();
