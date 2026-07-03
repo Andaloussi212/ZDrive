@@ -23,6 +23,22 @@ public class ResourceService {
     }
 
     public String createResource(CreateResourceRequest request) {
+        if (request.getTitle() == null || request.getTitle().trim().isEmpty()) {
+            return "Le titre est obligatoire";
+        }
+
+        if (request.getType() == null || request.getType().trim().isEmpty()) {
+            return "Le type est obligatoire";
+        }
+
+        if (request.getFormat() == null || request.getFormat().trim().isEmpty()) {
+            return "Le format est obligatoire";
+        }
+
+        if (request.getSubjectId() == null) {
+            return "La matière est obligatoire";
+        }
+
         Resource newResource = new Resource(
             request.getTitle(),
             request.getDescription(),
@@ -53,6 +69,22 @@ public class ResourceService {
             return "Ressource introuvable";
         }
 
+        if (request.getTitle() == null || request.getTitle().trim().isEmpty()) {
+            return "Le titre est obligatoire";
+        }
+
+        if (request.getType() == null || request.getType().trim().isEmpty()) {
+            return "Le type est obligatoire";
+        }
+
+        if (request.getFormat() == null || request.getFormat().trim().isEmpty()) {
+            return "Le format est obligatoire";
+        }
+
+        if (request.getSubjectId() == null) {
+            return "La matière est obligatoire";
+        }
+
         resource.setTitle(request.getTitle());
         resource.setDescription(request.getDescription());
         resource.setType(request.getType());
@@ -62,7 +94,7 @@ public class ResourceService {
         resourceRepository.save(resource);
 
         return "Ressource modifiée";
-    }
+        }
 
     public List<Resource> getResourcesBySubjectId(Long subjectId) {
         return resourceRepository.findBySubjectId(subjectId);

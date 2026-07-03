@@ -1,29 +1,40 @@
 package com.zdrive.backend.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class CreateResourceRequest {
-  private String title;
-  private String description;
-  private String type;
-  private Long subjectId;
-  private String format;
+    @NotBlank(message = "Le titre est obligatoire")
+    private String title;
 
-  public String getTitle() {
-    return this.title;
-  }
+    private String description;
 
-  public String getDescription() {
-    return this.description;
-  }
+    @NotBlank(message = "Le type est obligatoire")
+    private String type;
 
-  public String getType() {
-    return this.type;
-  }
+    @NotBlank(message = "Le format est obligatoire")
+    private String format;
 
-  public Long getSubjectId() {
-    return this.subjectId;
-  }
+    @NotNull(message = "La matière est obligatoire")
+    private Long subjectId;
 
-  public String getFormat() {
-    return format;
-  }
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
 }

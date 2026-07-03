@@ -46,8 +46,8 @@ public class ResourceController {
 
     @PutMapping("/api/resources/{id}")
     public String updateResource(
-            @PathVariable Long id,
-            @RequestBody UpdateResourceRequest request
+        @PathVariable Long id,
+        @RequestBody UpdateResourceRequest request
     ) {
         return resourceService.updateResource(id, request);
     }
