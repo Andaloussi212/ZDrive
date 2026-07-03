@@ -11,8 +11,11 @@ function ResourcesPage() {
   const [subjects, setSubjects] = useState([]);
   const [resources, setResources] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     Promise.all([getSubjects(), getResources(selectedSubjectId)])
       .then(([subjectsData, resourcesData]) => {
         setSubjects(subjectsData);
@@ -21,6 +24,9 @@ function ResourcesPage() {
       })
       .catch(() => {
         setError(ERROR_MESSAGES.resources);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [selectedSubjectId]);
 
@@ -49,18 +55,20 @@ function ResourcesPage() {
 
       {error && <p className="empty-message">{error}</p>}
 
-      {!error && resources.length > 0 ? (
-        <section className="resources-grid">
+      {loading && <p className="empty-message">Chargement des ressources...</p>}
+
+      {!error && !loading && resources.length > 0 && (
+        <section className="resources-list">
           {resources.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
           ))}
         </section>
-      ) : (
-        !error && (
-          <p className="empty-message">
-            Aucune ressource disponible pour cette matière.
-          </p>
-        )
+      )}
+
+      {!error && !loading && resources.length === 0 && (
+        <p className="empty-message">
+          Aucune ressource disponible pour cette matière.
+        </p>
       )}
     </main>
   );

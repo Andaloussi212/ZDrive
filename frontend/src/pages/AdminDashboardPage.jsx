@@ -8,8 +8,11 @@ function AdminDashboardPage() {
   const [subjects, setSubjects] = useState([]);
   const [resources, setResources] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     Promise.all([getSemesters(), getSubjects(), getResources()])
       .then(([semestersData, subjectsData, resourcesData]) => {
         setSemesters(semestersData);
@@ -19,6 +22,9 @@ function AdminDashboardPage() {
       })
       .catch(() => {
         setError(ERROR_MESSAGES.dashboard);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
   return (
@@ -30,7 +36,11 @@ function AdminDashboardPage() {
 
       {error && <p className="empty-message">{error}</p>}
 
-      {!error && (
+      {loading && (
+        <p className="empty-message">Chargement du tableau de bord...</p>
+      )}
+
+      {!error && !loading && (
         <>
           <section className="admin-stats">
             <article className="admin-stat-card">

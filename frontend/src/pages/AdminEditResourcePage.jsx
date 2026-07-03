@@ -19,31 +19,38 @@ function AdminEditResourcePage() {
 
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     getResources()
       .then((data) => {
-        const selectedResource = data.find(
-          (resource) => resource.id === selectedResourceId
+        const resourceToEdit = data.find(
+          (resource) => resource.id === Number(resourceId)
         );
 
-        if (selectedResource) {
-          setFormData({
-            title: selectedResource.title,
-            description: selectedResource.description || '',
-            type: selectedResource.type,
-            format: selectedResource.format,
-            subjectId: selectedResource.subjectId,
-          });
-          setError('');
-        } else {
-          setError('Ressource introuvable.');
+        if (!resourceToEdit) {
+          setError(ERROR_MESSAGES.resourceNotFound);
+          return;
         }
+
+        setFormData({
+          title: resourceToEdit.title,
+          description: resourceToEdit.description || '',
+          type: resourceToEdit.type,
+          format: resourceToEdit.format,
+          subjectId: resourceToEdit.subjectId,
+        });
+        setError('');
       })
       .catch(() => {
         setError(ERROR_MESSAGES.editResource);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, [selectedResourceId]);
+  }, [resourceId]);
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -85,7 +92,11 @@ function AdminEditResourcePage() {
 
       {error && <p className="empty-message">{error}</p>}
 
-      {!error && (
+      {loading && (
+        <p className="empty-message">Chargement de la ressource...</p>
+      )}
+
+      {!error && !loading && (
         <section className="admin-form-card">
           <form className="admin-form" onSubmit={handleSubmit}>
             <div className="form-group">

@@ -11,8 +11,11 @@ function SubjectsPage() {
   const [semesters, setSemesters] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     Promise.all([getSemesters(), getSubjects(selectedSemesterId)])
       .then(([semestersData, subjectsData]) => {
         setSemesters(semestersData);
@@ -21,6 +24,9 @@ function SubjectsPage() {
       })
       .catch(() => {
         setError(ERROR_MESSAGES.subjects);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [selectedSemesterId]);
 
@@ -41,18 +47,20 @@ function SubjectsPage() {
 
       {error && <p className="empty-message">{error}</p>}
 
-      {!error && subjects.length > 0 ? (
+      {loading && <p className="empty-message">Chargement des matières...</p>}
+
+      {!error && !loading && subjects.length > 0 && (
         <section className="subjects-grid">
           {subjects.map((subject) => (
             <SubjectCard key={subject.id} subject={subject} />
           ))}
         </section>
-      ) : (
-        !error && (
-          <p className="empty-message">
-            Aucune matière disponible pour ce semestre.
-          </p>
-        )
+      )}
+
+      {!error && !loading && subjects.length === 0 && (
+        <p className="empty-message">
+          Aucune matière disponible pour ce semestre.
+        </p>
       )}
     </main>
   );

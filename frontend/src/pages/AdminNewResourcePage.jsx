@@ -11,6 +11,7 @@ function AdminNewResourcePage() {
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -23,6 +24,8 @@ function AdminNewResourcePage() {
   });
 
   useEffect(() => {
+    setLoading(true);
+
     Promise.all([getSemesters(), getSubjects()])
       .then(([semestersData, subjectsData]) => {
         setSemesters(semestersData);
@@ -45,6 +48,9 @@ function AdminNewResourcePage() {
       })
       .catch(() => {
         setError(ERROR_MESSAGES.form);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -158,7 +164,9 @@ function AdminNewResourcePage() {
 
       {error && <p className="empty-message">{error}</p>}
 
-      {!error && (
+      {loading && <p className="empty-message">Chargement du formulaire...</p>}
+
+      {!error && !loading && (
         <section className="admin-form-card">
           <form className="admin-form" onSubmit={handleSubmit}>
             <div className="form-group">
