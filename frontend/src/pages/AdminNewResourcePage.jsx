@@ -1,6 +1,11 @@
 import Button from '../components/Button';
 import { resourceTypes } from '../constants/resourceTypes';
-import { getSemesters, getSubjects, createResource } from '../services/Api';
+import {
+  getSemesters,
+  getSubjects,
+  createResource,
+  uploadFile,
+} from '../services/Api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
@@ -130,24 +135,33 @@ function AdminNewResourcePage() {
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (formData.title.trim() === '') {
       setSubmitMessage('Le titre est obligatoire');
       return;
     }
-    const resourceData = {
-      title: formData.title,
-      description: formData.description,
-      type: formData.type,
-      format: formData.format,
-      fileName: formData.file ? formData.file.name : '',
-      fileUrl: formData.file ? `/uploads/${formData.file.name}` : '',
-      subjectId: formData.subjectId,
-    };
 
-    createResource(resourceData).then((message) => {
+    try {
+      let uploadedFileUrl = '';
+
+      if (formData.file) {
+        uploadedFileUrl = await uploadFile(formData.file);
+      }
+
+      const resourceData = {
+        title: formData.title,
+        description: formData.description,
+        type: formData.type,
+        format: formData.format,
+        fileName: formData.file ? formData.file.name : '',
+        fileUrl: uploadedFileUrl,
+        subjectId: formData.subjectId,
+      };
+
+      const message = await createResource(resourceData);
+
       if (message !== 'Ressource ajoutée') {
         setSubmitMessage(message);
         return;
@@ -155,7 +169,11 @@ function AdminNewResourcePage() {
 
       setSubmitMessage('');
       navigate('/admin/resources');
-    });
+    } catch (error) {
+      setSubmitMessage(
+        "Impossible d'ajouter la ressource. Vérifie que le backend est lancé et que l'upload fonctionne."
+      );
+    }
   }
   return (
     <main className="admin-page">

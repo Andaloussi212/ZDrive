@@ -68,3 +68,16 @@ export async function updateResource(id, resourceData) {
   const checkedResponse = await handleResponse(response);
   return checkedResponse.text();
 }
+
+export async function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${API_BASE_URL}/files/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
