@@ -233,6 +233,12 @@ function AdminNewResourcePage() {
             <div className="form-group">
               <label htmlFor="file">Fichier</label>
               <input type="file" id="file" onChange={handleFileChange} />
+
+              {formData.format && (
+                <p className="empty-message">
+                  Format détecté : {formData.format}
+                </p>
+              )}
             </div>
 
             {submitMessage && <p className="empty-message">{submitMessage}</p>}
