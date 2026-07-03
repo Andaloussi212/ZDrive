@@ -25,6 +25,7 @@ function AdminEditResourcePage() {
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -112,6 +113,7 @@ function AdminEditResourcePage() {
     event.preventDefault();
 
     setSubmitMessage('');
+    setSubmitting(true);
 
     try {
       let uploadedFileUrl = formData.fileUrl;
@@ -143,6 +145,8 @@ function AdminEditResourcePage() {
       setSubmitMessage(
         "Impossible de modifier la ressource. Vérifie que le backend est lancé et que l'upload fonctionne."
       );
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -222,9 +226,21 @@ function AdminEditResourcePage() {
               )}
             </div>
 
+            {submitting && (
+              <p className="empty-message">Enregistrement en cours...</p>
+            )}
+
             {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
-            <Button text="Enregistrer les modifications" type="submit" />
+            <Button
+              text={
+                submitting
+                  ? 'Enregistrement...'
+                  : 'Enregistrer les modifications'
+              }
+              type="submit"
+              disabled={submitting}
+            />
           </form>
         </section>
       )}
