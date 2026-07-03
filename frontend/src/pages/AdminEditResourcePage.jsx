@@ -5,6 +5,8 @@ import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 import { resourceTypes } from '../constants/resourceTypes';
 
+const resourceFormats = ['PDF', 'PNG', 'JPG', 'DOCX', 'OTHER'];
+
 function AdminEditResourcePage() {
   const { resourceId } = useParams();
   const selectedResourceId = Number(resourceId);
@@ -132,12 +134,17 @@ function AdminEditResourcePage() {
 
             <div className="form-group">
               <label htmlFor="format">Format</label>
-              <input
-                type="text"
+              <select
                 id="format"
                 value={formData.format}
                 onChange={handleChange}
-              />
+              >
+                {resourceFormats.map((format) => (
+                  <option key={format} value={format}>
+                    {format}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {submitMessage && <p className="empty-message">{submitMessage}</p>}
