@@ -7,6 +7,7 @@ import { ERROR_MESSAGES } from '../constants/errorMessages';
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
   const [error, setError] = useState('');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -18,7 +19,7 @@ function AdminResourcesPage() {
     }
 
     deleteResource(id).then((message) => {
-      alert(message);
+      setSubmitMessage(message);
 
       getResources().then((data) => {
         setResources(data);
@@ -44,6 +45,8 @@ function AdminResourcesPage() {
       </header>
 
       {error && <p className="empty-message">{error}</p>}
+
+      {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
       {!error && (
         <section className="admin-table-card">
