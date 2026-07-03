@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getResources, updateResource } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
+import { resourceTypes } from '../constants/resourceTypes';
 
 function AdminEditResourcePage() {
   const { resourceId } = useParams();
@@ -119,13 +120,14 @@ function AdminEditResourcePage() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="type">Type</label>
-              <input
-                type="text"
-                id="type"
-                value={formData.type}
-                onChange={handleChange}
-              />
+              <label htmlFor="type">Type de ressource</label>
+              <select id="type" value={formData.type} onChange={handleChange}>
+                {resourceTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group">
