@@ -10,6 +10,7 @@ function AdminNewResourcePage() {
   const [semesters, setSemesters] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState('');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -127,7 +128,7 @@ function AdminNewResourcePage() {
     event.preventDefault();
 
     if (formData.title.trim() === '') {
-      alert('Le titre est obligatoire');
+      setSubmitMessage('Le titre est obligatoire');
       return;
     }
     const resourceData = {
@@ -139,7 +140,12 @@ function AdminNewResourcePage() {
     };
 
     createResource(resourceData).then((message) => {
-      alert(message);
+      if (message !== 'Ressource ajoutée') {
+        setSubmitMessage(message);
+        return;
+      }
+
+      setSubmitMessage('');
       navigate('/admin/resources');
     });
   }
@@ -220,6 +226,8 @@ function AdminNewResourcePage() {
               <label htmlFor="file">Fichier</label>
               <input type="file" id="file" onChange={handleFileChange} />
             </div>
+
+            {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
             <Button text="Ajouter la ressource" type="submit" />
           </form>

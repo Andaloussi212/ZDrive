@@ -18,6 +18,7 @@ function AdminEditResourcePage() {
   });
 
   const [error, setError] = useState('');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     getResources()
@@ -65,7 +66,12 @@ function AdminEditResourcePage() {
     };
 
     updateResource(selectedResourceId, resourceData).then((message) => {
-      alert(message);
+      if (message !== 'Ressource modifiée') {
+        setSubmitMessage(message);
+        return;
+      }
+
+      setSubmitMessage('');
       navigate('/admin/resources');
     });
   }
@@ -120,6 +126,8 @@ function AdminEditResourcePage() {
                 onChange={handleChange}
               />
             </div>
+
+            {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
             <Button text="Enregistrer les modifications" type="submit" />
           </form>
