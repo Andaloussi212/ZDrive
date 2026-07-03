@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getResources, updateResource } from '../services/Api';
+import { getResources, updateResource, uploadFile } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 import { resourceTypes } from '../constants/resourceTypes';
@@ -16,7 +16,10 @@ function AdminEditResourcePage() {
     description: '',
     type: '',
     format: '',
+    fileName: '',
+    fileUrl: '',
     subjectId: '',
+    file: null,
   });
 
   const [error, setError] = useState('');
@@ -42,7 +45,10 @@ function AdminEditResourcePage() {
           description: resourceToEdit.description || '',
           type: resourceToEdit.type,
           format: resourceToEdit.format,
+          fileName: resourceToEdit.fileName || '',
+          fileUrl: resourceToEdit.fileUrl || '',
           subjectId: resourceToEdit.subjectId,
+          file: null,
         });
         setError('');
       })
@@ -63,18 +69,69 @@ function AdminEditResourcePage() {
     });
   }
 
-  function handleSubmit(event) {
+  function getFileFormat(fileName) {
+    const extension = fileName.split('.').pop().toUpperCase();
+
+    if (extension === 'PDF') {
+      return 'PDF';
+    }
+
+    if (extension === 'PNG') {
+      return 'PNG';
+    }
+
+    if (extension === 'JPG' || extension === 'JPEG') {
+      return 'JPG';
+    }
+
+    if (extension === 'DOCX') {
+      return 'DOCX';
+    }
+
+    return 'OTHER';
+  }
+
+  function handleFileChange(event) {
+    const selectedFile = event.target.files[0];
+
+    if (!selectedFile) {
+      return;
+    }
+
+    const detectedFormat = getFileFormat(selectedFile.name);
+
+    setFormData({
+      ...formData,
+      file: selectedFile,
+      fileName: selectedFile.name,
+      format: detectedFormat,
+    });
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    const resourceData = {
-      title: formData.title,
-      description: formData.description,
-      type: formData.type,
-      format: formData.format,
-      subjectId: formData.subjectId,
-    };
+    setSubmitMessage('');
 
-    updateResource(selectedResourceId, resourceData).then((message) => {
+    try {
+      let uploadedFileUrl = formData.fileUrl;
+
+      if (formData.file) {
+        uploadedFileUrl = await uploadFile(formData.file);
+      }
+
+      const resourceData = {
+        title: formData.title,
+        description: formData.description,
+        type: formData.type,
+        format: formData.format,
+        fileName: formData.fileName,
+        fileUrl: uploadedFileUrl,
+        subjectId: formData.subjectId,
+      };
+
+      const message = await updateResource(selectedResourceId, resourceData);
+
       if (message !== 'Ressource modifiée') {
         setSubmitMessage(message);
         return;
@@ -82,7 +139,11 @@ function AdminEditResourcePage() {
 
       setSubmitMessage('');
       navigate('/admin/resources');
-    });
+    } catch (error) {
+      setSubmitMessage(
+        "Impossible de modifier la ressource. Vérifie que le backend est lancé et que l'upload fonctionne."
+      );
+    }
   }
 
   return (
@@ -144,6 +205,21 @@ function AdminEditResourcePage() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="file">Remplacer le fichier</label>
+              <input type="file" id="file" onChange={handleFileChange} />
+
+              {formData.fileName && (
+                <p className="empty-message">
+                  Fichier actuel : {formData.fileName}
+                </p>
+              )}
+
+              {formData.format && (
+                <p className="empty-message">Format : {formData.format}</p>
+              )}
             </div>
 
             {submitMessage && <p className="empty-message">{submitMessage}</p>}
