@@ -1,5 +1,13 @@
+import { useState } from 'react';
 import Button from './Button';
+
 function ResourceCard({ resource }) {
+  const [fileMessage, setFileMessage] = useState('');
+
+  function handleFileAction() {
+    setFileMessage("Le fichier réel n'est pas encore stocké sur le serveur.");
+  }
+
   return (
     <article className="resource-card">
       <h2>{resource.title}</h2>
@@ -13,10 +21,23 @@ function ResourceCard({ resource }) {
           {resource.fileName || 'Aucun fichier'}
         </span>
       </div>
+
       <div className="resource-actions">
-        <Button text="Consulter" />
-        <Button text="Télécharger" />
+        {resource.fileUrl ? (
+          <>
+            <Button
+              text="Consulter"
+              variant="secondary"
+              onClick={handleFileAction}
+            />
+            <Button text="Télécharger" onClick={handleFileAction} />
+          </>
+        ) : (
+          <p className="empty-message">Aucun fichier disponible</p>
+        )}
       </div>
+
+      {fileMessage && <p className="empty-message">{fileMessage}</p>}
     </article>
   );
 }
