@@ -65,6 +65,7 @@ function AdminResourcesPage() {
                 <th>Description</th>
                 <th>Type</th>
                 <th>Format</th>
+                <th>Fichier</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -76,6 +77,7 @@ function AdminResourcesPage() {
                   <td>{resource.description || '—'}</td>
                   <td>{resource.type}</td>
                   <td>{resource.format}</td>
+                  <td>{resource.fileName || '—'}</td>
                   <td className="admin-table-actions">
                     <Link
                       to={`/admin/resources/${resource.id}/edit`}
