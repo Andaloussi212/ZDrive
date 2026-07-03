@@ -44,6 +44,7 @@ public class ResourceService {
             request.getDescription(),
             request.getType(),
             request.getFormat(),
+            request.getFileName(),
             request.getSubjectId()
         );
 
@@ -89,6 +90,7 @@ public class ResourceService {
         resource.setDescription(request.getDescription());
         resource.setType(request.getType());
         resource.setFormat(request.getFormat());
+        resource.setFileName(request.getFileName());
         resource.setSubjectId(request.getSubjectId());
 
         resourceRepository.save(resource);

@@ -9,6 +9,8 @@ public class UpdateResourceRequest {
 
     private String description;
 
+    private String fileName;
+
     @NotBlank(message = "Le type est obligatoire")
     private String type;
 
@@ -36,5 +38,9 @@ public class UpdateResourceRequest {
 
     public Long getSubjectId() {
         return subjectId;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

@@ -10,30 +10,33 @@ public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
+    private String description;
     private String type;
     private String format;
+    private String fileName;
     private Long subjectId;
-    private String description;
+
 
     public Resource() {
     }
 
-    public Resource(Long id, String title, String description, String type, String format, Long subjectId) {
+    public Resource(Long id, String title, String description, String type, String format, String fileName, Long subjectId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.type = type;
         this.format = format;
+        this.fileName = fileName;
         this.subjectId = subjectId;
     }
 
-    public Resource(String title, String description, String type, String format, Long subjectId) {
+    public Resource(String title, String description, String type, String format, String fileName, Long subjectId) {
         this.title = title;
         this.description = description;
         this.type = type;
         this.format = format;
+        this.fileName = fileName;
         this.subjectId = subjectId;
     }
 
@@ -61,6 +64,10 @@ public class Resource {
         return description;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -79,5 +86,9 @@ public class Resource {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

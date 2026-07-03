@@ -142,6 +142,7 @@ function AdminNewResourcePage() {
       description: formData.description,
       type: formData.type,
       format: formData.format,
+      fileName: formData.file ? formData.file.name : '',
       subjectId: formData.subjectId,
     };
 
