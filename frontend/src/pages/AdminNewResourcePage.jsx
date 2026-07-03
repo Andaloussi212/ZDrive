@@ -17,6 +17,7 @@ function AdminNewResourcePage() {
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -143,6 +144,9 @@ function AdminNewResourcePage() {
       return;
     }
 
+    setSubmitting(true);
+    setSubmitMessage('');
+
     try {
       let uploadedFileUrl = '';
 
@@ -173,6 +177,8 @@ function AdminNewResourcePage() {
       setSubmitMessage(
         "Impossible d'ajouter la ressource. Vérifie que le backend est lancé et que l'upload fonctionne."
       );
+    } finally {
+      setSubmitting(false);
     }
   }
   return (
@@ -267,9 +273,15 @@ function AdminNewResourcePage() {
               )}
             </div>
 
+            {submitting && <p className="empty-message">Upload en cours...</p>}
+
             {submitMessage && <p className="empty-message">{submitMessage}</p>}
 
-            <Button text="Ajouter la ressource" type="submit" />
+            <Button
+              text={submitting ? 'Ajout en cours...' : 'Ajouter la ressource'}
+              type="submit"
+              disabled={submitting}
+            />
           </form>
         </section>
       )}
