@@ -9,6 +9,9 @@ function ResourceCard({ resource }) {
       <div className="resource-meta">
         <span className="resource-badge">{resource.type}</span>
         <span className="resource-badge">{resource.format}</span>
+        <span className="resource-badge">
+          {resource.fileName || 'Aucun fichier'}
+        </span>
       </div>
       <div className="resource-actions">
         <Button text="Consulter" />
