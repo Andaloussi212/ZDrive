@@ -16,27 +16,30 @@ public class Resource {
     private String format;
     private String fileName;
     private Long subjectId;
+    private String fileUrl;
 
 
     public Resource() {
     }
 
-    public Resource(Long id, String title, String description, String type, String format, String fileName, Long subjectId) {
+    public Resource(Long id, String title, String description, String type, String format, String fileName, String fileUrl, Long subjectId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.type = type;
         this.format = format;
         this.fileName = fileName;
+        this.fileUrl = fileUrl;
         this.subjectId = subjectId;
     }
 
-    public Resource(String title, String description, String type, String format, String fileName, Long subjectId) {
+    public Resource(String title, String description, String type, String format, String fileName, String fileUrl, Long subjectId) {
         this.title = title;
         this.description = description;
         this.type = type;
         this.format = format;
         this.fileName = fileName;
+        this.fileUrl = fileUrl;
         this.subjectId = subjectId;
     }
 
@@ -68,6 +71,10 @@ public class Resource {
         return fileName;
     }
 
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -90,5 +97,9 @@ public class Resource {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }

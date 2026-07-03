@@ -8,8 +8,8 @@ public class UpdateResourceRequest {
     private String title;
 
     private String description;
-
     private String fileName;
+    private String fileUrl;
 
     @NotBlank(message = "Le type est obligatoire")
     private String type;
@@ -42,5 +42,9 @@ public class UpdateResourceRequest {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
     }
 }

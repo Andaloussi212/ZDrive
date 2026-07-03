@@ -143,6 +143,7 @@ function AdminNewResourcePage() {
       type: formData.type,
       format: formData.format,
       fileName: formData.file ? formData.file.name : '',
+      fileUrl: formData.file ? `/uploads/${formData.file.name}` : '',
       subjectId: formData.subjectId,
     };
 

@@ -45,6 +45,7 @@ public class ResourceService {
             request.getType(),
             request.getFormat(),
             request.getFileName(),
+            request.getFileUrl(),
             request.getSubjectId()
         );
 
@@ -91,6 +92,7 @@ public class ResourceService {
         resource.setType(request.getType());
         resource.setFormat(request.getFormat());
         resource.setFileName(request.getFileName());
+        resource.setFileUrl(request.getFileUrl());
         resource.setSubjectId(request.getSubjectId());
 
         resourceRepository.save(resource);
