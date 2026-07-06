@@ -13,17 +13,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.zdrive.backend.service.AdminAuthService;
 
 @RestController
 public class FileController {
 
     private final Path uploadDirectory = Paths.get("uploads");
+    private final AdminAuthService adminAuthService;
+
+    public FileController(AdminAuthService adminAuthService) {
+        this.adminAuthService = adminAuthService;
+    }
 
     @PostMapping("/api/files/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestHeader(value = "X-Admin-Password", required = false) String adminPassword
+    ) throws IOException {
+        if (!adminAuthService.isAuthorized(adminPassword)) {
+            return ResponseEntity.status(401).body("Non autorisé");
+        }
+
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("Fichier vide");
         }
@@ -33,6 +48,7 @@ public class FileController {
         }
 
         Path filePath = uploadDirectory.resolve(file.getOriginalFilename());
+
         Files.copy(
             file.getInputStream(),
             filePath,
