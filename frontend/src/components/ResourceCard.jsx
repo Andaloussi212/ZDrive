@@ -1,10 +1,12 @@
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 function ResourceCard({ resource }) {
   const fileUrl = resource.fileUrl
-    ? `http://localhost:8080${resource.fileUrl}`
+    ? `${BACKEND_BASE_URL}${resource.fileUrl}`
     : '';
 
   const downloadUrl = resource.fileName
-    ? `http://localhost:8080/api/files/download/${resource.fileName}`
+    ? `${BACKEND_BASE_URL}/api/files/download/${resource.fileName}`
     : '';
 
   return (
