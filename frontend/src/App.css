@@ -792,4 +792,55 @@ main {
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .hero-actions,
+  .resource-actions,
+  .admin-actions {
+    width: 100%;
+  }
+
+  .hero-actions .button,
+  .resource-actions .button {
+    width: 100%;
+  }
+
+  .button {
+    width: fit-content;
+  }
+
+  .admin-form .button {
+    width: 100%;
+  }
+
+  .semester-card,
+  .subject-card,
+  .resource-card,
+  .admin-form-card,
+  .admin-stat-card,
+  .settings-card,
+  .admin-action-card {
+    border-radius: var(--radius-md);
+  }
+
+  .card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-table-card {
+    border-radius: var(--radius-md);
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 13px;
+  }
+
+  .page-header h1 {
+    font-size: 2.35rem;
+  }
+
+  .page-header p {
+    font-size: 1rem;
+  }
 }
