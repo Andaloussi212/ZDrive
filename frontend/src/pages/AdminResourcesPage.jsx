@@ -4,6 +4,7 @@ import { getResources, deleteResource } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 import { resourceTypes } from '../constants/resourceTypes';
+import { resourceFormats } from '../constants/resourceFormats';
 
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
@@ -12,6 +13,7 @@ function AdminResourcesPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
+  const [selectedFormat, setSelectedFormat] = useState('');
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -59,7 +61,10 @@ function AdminResourcesPage() {
 
     const matchesType = selectedType === '' || resource.type === selectedType;
 
-    return matchesSearch && matchesType;
+    const matchesFormat =
+      selectedFormat === '' || resource.format === selectedFormat;
+
+    return matchesSearch && matchesType && matchesFormat;
   });
 
   return (
@@ -109,6 +114,20 @@ function AdminResourcesPage() {
             {resourceTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedFormat}
+            onChange={(event) => setSelectedFormat(event.target.value)}
+            className="search-input"
+          >
+            <option value="">Tous les formats</option>
+
+            {resourceFormats.map((format) => (
+              <option key={format} value={format}>
+                {format}
               </option>
             ))}
           </select>
