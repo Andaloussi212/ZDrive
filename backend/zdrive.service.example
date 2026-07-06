@@ -1,0 +1,20 @@
+[Unit]
+Description=ZDrive Spring Boot Backend
+After=network.target mariadb.service
+
+[Service]
+User=zdrive
+WorkingDirectory=/opt/zdrive/backend
+ExecStart=/usr/bin/java -jar /opt/zdrive/backend/backend.jar
+
+Environment=DB_URL=jdbc:mariadb://localhost:3306/zdrive_db
+Environment=DB_USERNAME=zdrive_user
+Environment=DB_PASSWORD=change_me
+Environment=ADMIN_PASSWORD=change_me
+Environment=FRONTEND_URL=https://ton-domaine.fr
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
