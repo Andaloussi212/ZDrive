@@ -9,6 +9,7 @@ function AdminResourcesPage() {
   const [error, setError] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -43,6 +44,19 @@ function AdminResourcesPage() {
         setLoading(false);
       });
   }, []);
+
+  const filteredResources = resources.filter((resource) => {
+    const search = searchTerm.toLowerCase();
+
+    return (
+      resource.title?.toLowerCase().includes(search) ||
+      resource.description?.toLowerCase().includes(search) ||
+      resource.type?.toLowerCase().includes(search) ||
+      resource.format?.toLowerCase().includes(search) ||
+      resource.fileName?.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <main className="admin-page">
       <header className="page-header page-header-row">
@@ -58,13 +72,36 @@ function AdminResourcesPage() {
         </Link>
       </header>
 
-      {error && <p className="empty-message">{error}</p>}
+      {error && <p className="empty-message message-error">{error}</p>}
 
-      {loading && <p className="empty-message">Chargement des ressources...</p>}
+      {loading && (
+        <p className="empty-message message-info">
+          Chargement des ressources...
+        </p>
+      )}
 
-      {submitMessage && <p className="empty-message">{submitMessage}</p>}
+      {submitMessage && (
+        <p className="empty-message message-success">{submitMessage}</p>
+      )}
 
       {!error && !loading && (
+        <div className="admin-toolbar">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Rechercher une ressource..."
+            className="search-input"
+          />
+
+          <span>
+            {filteredResources.length} résultat
+            {filteredResources.length > 1 ? 's' : ''}
+          </span>
+        </div>
+      )}
+
+      {!error && !loading && filteredResources.length > 0 && (
         <section className="admin-table-card">
           <table className="admin-table">
             <thead>
@@ -79,7 +116,7 @@ function AdminResourcesPage() {
             </thead>
 
             <tbody>
-              {resources.map((resource) => (
+              {filteredResources.map((resource) => (
                 <tr key={resource.id}>
                   <td>{resource.title}</td>
                   <td>{resource.description || '—'}</td>
@@ -93,6 +130,7 @@ function AdminResourcesPage() {
                     >
                       Modifier
                     </Link>
+
                     <Button
                       text="Supprimer"
                       variant="danger"
@@ -104,6 +142,12 @@ function AdminResourcesPage() {
             </tbody>
           </table>
         </section>
+      )}
+
+      {!error && !loading && filteredResources.length === 0 && (
+        <p className="empty-message">
+          Aucune ressource ne correspond à ta recherche.
+        </p>
       )}
     </main>
   );
