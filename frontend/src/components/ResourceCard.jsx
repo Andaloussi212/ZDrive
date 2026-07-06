@@ -3,11 +3,23 @@ function ResourceCard({ resource }) {
     ? `http://localhost:8080${resource.fileUrl}`
     : '';
 
+  const downloadUrl = resource.fileName
+    ? `http://localhost:8080/api/files/download/${resource.fileName}`
+    : '';
+
   return (
     <article className="resource-card">
-      <h2>{resource.title}</h2>
+      <div>
+        <span className="card-label">Ressource</span>
 
-      {resource.description && <p>{resource.description}</p>}
+        <h2>{resource.title}</h2>
+
+        {resource.description ? (
+          <p>{resource.description}</p>
+        ) : (
+          <p>Aucune description disponible.</p>
+        )}
+      </div>
 
       <div className="resource-meta">
         <span className="resource-badge">{resource.type}</span>
@@ -29,10 +41,7 @@ function ResourceCard({ resource }) {
               Consulter
             </a>
 
-            <a
-              href={`http://localhost:8080/api/files/download/${resource.fileName}`}
-              className="button"
-            >
+            <a href={downloadUrl} className="button">
               Télécharger
             </a>
           </>

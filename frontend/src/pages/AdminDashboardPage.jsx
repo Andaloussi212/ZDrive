@@ -60,9 +60,23 @@ function AdminDashboardPage() {
           </section>
 
           <section className="admin-actions">
-            <Link to="/admin/resources">Gérer les ressources</Link>
-            <Link to="/admin/resources/new">Ajouter une ressource</Link>
-            <Link to="/admin/settings">Paramètres</Link>
+            <Link to="/admin/resources" className="admin-action-card">
+              <span>Ressources</span>
+              <strong>Gérer les fichiers →</strong>
+              <p>Modifier, supprimer ou consulter les ressources existantes.</p>
+            </Link>
+
+            <Link to="/admin/resources/new" className="admin-action-card">
+              <span>Ajout</span>
+              <strong>Ajouter une ressource →</strong>
+              <p>Uploader un nouveau fichier et l’associer à une matière.</p>
+            </Link>
+
+            <Link to="/admin/settings" className="admin-action-card">
+              <span>Paramètres</span>
+              <strong>Configurer ZDrive →</strong>
+              <p>Préparer les réglages futurs de la plateforme.</p>
+            </Link>
           </section>
         </>
       )}

@@ -3,37 +3,42 @@ function AdminSettingsPage() {
     <main className="admin-page">
       <header className="page-header">
         <h1>Paramètres</h1>
-        <p>Configuration générale de la plateforme ZDrive.</p>
+        <p>
+          Prépare la configuration future de ZDrive : accès, sécurité,
+          organisation et préférences de la plateforme.
+        </p>
       </header>
 
-      <section className="admin-form-card">
-        <form className="admin-form">
-          <div className="form-group">
-            <label htmlFor="studentPassword">
-              Mot de passe étudiant global
-            </label>
-            <input
-              type="password"
-              id="studentPassword"
-              placeholder="Nouveau mot de passe"
-            />
-          </div>
+      <section className="settings-grid">
+        <article className="settings-card">
+          <span className="card-label">Accès</span>
+          <h2>Authentification</h2>
+          <p>
+            Préparer la gestion des comptes admin et des accès privés aux
+            ressources.
+          </p>
+          <strong>À venir</strong>
+        </article>
 
-          <div className="form-group">
-            <label htmlFor="allowedTypes">Types de fichiers autorisés</label>
-            <input
-              type="text"
-              id="allowedTypes"
-              value="PDF, PNG, JPG"
-              readOnly
-            />
-          </div>
+        <article className="settings-card">
+          <span className="card-label">Organisation</span>
+          <h2>Semestres & matières</h2>
+          <p>
+            Ajouter plus tard la gestion complète des semestres et des matières
+            depuis l’interface admin.
+          </p>
+          <strong>À venir</strong>
+        </article>
 
-          <div className="form-group">
-            <label htmlFor="maxUploadSize">Taille maximale d’upload</label>
-            <input type="text" id="maxUploadSize" value="20 Mo" readOnly />
-          </div>
-        </form>
+        <article className="settings-card">
+          <span className="card-label">Stockage</span>
+          <h2>Fichiers uploadés</h2>
+          <p>
+            Configurer les règles liées aux fichiers, aux formats acceptés et à
+            la taille maximale.
+          </p>
+          <strong>Actif</strong>
+        </article>
       </section>
     </main>
   );

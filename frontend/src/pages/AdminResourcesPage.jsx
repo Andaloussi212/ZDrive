@@ -45,9 +45,17 @@ function AdminResourcesPage() {
   }, []);
   return (
     <main className="admin-page">
-      <header className="page-header">
-        <h1>Gestion des ressources</h1>
-        <p>Liste des ressources ajoutées sur ZDrive.</p>
+      <header className="page-header page-header-row">
+        <div>
+          <h1>Gestion des ressources</h1>
+          <p>
+            Ajoute, modifie et organise les fichiers disponibles sur ZDrive.
+          </p>
+        </div>
+
+        <Link to="/admin/resources/new" className="button">
+          Ajouter une ressource
+        </Link>
       </header>
 
       {error && <p className="empty-message">{error}</p>}

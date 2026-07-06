@@ -194,6 +194,14 @@ function AdminNewResourcePage() {
 
       {!error && !loading && (
         <section className="admin-form-card">
+          <div className="form-card-header">
+            <span>Nouvelle ressource</span>
+            <h2>Informations du fichier</h2>
+            <p>
+              Renseigne les détails de la ressource et associe-la à une matière.
+            </p>
+          </div>
+
           <form className="admin-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="title">Titre</label>
