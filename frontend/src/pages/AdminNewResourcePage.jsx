@@ -281,9 +281,13 @@ function AdminNewResourcePage() {
               )}
             </div>
 
-            {submitting && <p className="empty-message">Upload en cours...</p>}
+            {submitting && (
+              <p className="empty-message message-info">Upload en cours...</p>
+            )}
 
-            {submitMessage && <p className="empty-message">{submitMessage}</p>}
+            {submitMessage && (
+              <p className="empty-message message-error">{submitMessage}</p>
+            )}
 
             <Button
               text={submitting ? 'Ajout en cours...' : 'Ajouter la ressource'}

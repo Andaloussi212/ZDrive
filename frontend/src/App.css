@@ -51,6 +51,24 @@ main {
   padding: 14px 16px;
 }
 
+.message-info {
+  color: var(--secondary);
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(134, 239, 172, 0.22);
+}
+
+.message-error {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.32);
+}
+
+.message-success {
+  color: var(--secondary);
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
 .navbar {
   position: sticky;
   top: 0;

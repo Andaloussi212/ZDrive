@@ -227,10 +227,14 @@ function AdminEditResourcePage() {
             </div>
 
             {submitting && (
-              <p className="empty-message">Enregistrement en cours...</p>
+              <p className="empty-message message-info">
+                Enregistrement en cours...
+              </p>
             )}
 
-            {submitMessage && <p className="empty-message">{submitMessage}</p>}
+            {submitMessage && (
+              <p className="empty-message message-error">{submitMessage}</p>
+            )}
 
             <Button
               text={
