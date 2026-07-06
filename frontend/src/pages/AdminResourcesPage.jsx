@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getResources, deleteResource } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
+import { resourceTypes } from '../constants/resourceTypes';
 
 function AdminResourcesPage() {
   const [resources, setResources] = useState([]);
@@ -10,6 +11,7 @@ function AdminResourcesPage() {
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('');
 
   function handleDelete(id) {
     const confirmed = window.confirm(
@@ -48,13 +50,16 @@ function AdminResourcesPage() {
   const filteredResources = resources.filter((resource) => {
     const search = searchTerm.toLowerCase();
 
-    return (
+    const matchesSearch =
       resource.title?.toLowerCase().includes(search) ||
       resource.description?.toLowerCase().includes(search) ||
       resource.type?.toLowerCase().includes(search) ||
       resource.format?.toLowerCase().includes(search) ||
-      resource.fileName?.toLowerCase().includes(search)
-    );
+      resource.fileName?.toLowerCase().includes(search);
+
+    const matchesType = selectedType === '' || resource.type === selectedType;
+
+    return matchesSearch && matchesType;
   });
 
   return (
@@ -93,6 +98,20 @@ function AdminResourcesPage() {
             placeholder="Rechercher une ressource..."
             className="search-input"
           />
+
+          <select
+            value={selectedType}
+            onChange={(event) => setSelectedType(event.target.value)}
+            className="search-input"
+          >
+            <option value="">Tous les types</option>
+
+            {resourceTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
 
           <span>
             {filteredResources.length} résultat
