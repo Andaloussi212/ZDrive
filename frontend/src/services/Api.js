@@ -1,3 +1,4 @@
+import { ADMIN_PASSWORD } from '../constants/adminAuth';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 async function handleResponse(response) {
@@ -39,6 +40,7 @@ export async function createResource(resourceData) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
     },
     body: JSON.stringify(resourceData),
   });
@@ -50,6 +52,9 @@ export async function createResource(resourceData) {
 export async function deleteResource(id) {
   const response = await fetch(`${API_BASE_URL}/resources/${id}`, {
     method: 'DELETE',
+    headers: {
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
   });
 
   const checkedResponse = await handleResponse(response);
@@ -61,6 +66,7 @@ export async function updateResource(id, resourceData) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
     },
     body: JSON.stringify(resourceData),
   });
@@ -75,6 +81,9 @@ export async function uploadFile(file) {
 
   const response = await fetch(`${API_BASE_URL}/files/upload`, {
     method: 'POST',
+    headers: {
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
     body: formData,
   });
 
