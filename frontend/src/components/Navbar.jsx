@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Button from './Button';
 
 function Navbar() {
@@ -9,9 +9,11 @@ function Navbar() {
       </Link>
 
       <div className="navbar-links">
-        <Link to="/">Accueil</Link>
-        <Link to="/semesters">Semestres</Link>
-        <Link to="/admin">Admin</Link>
+        <NavLink to="/" end>
+          Accueil
+        </NavLink>
+        <NavLink to="/semesters">Semestres</NavLink>
+        <NavLink to="/admin">Admin</NavLink>
 
         <Button text="Déconnexion" variant="secondary" />
       </div>
