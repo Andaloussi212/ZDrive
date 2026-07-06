@@ -12,6 +12,7 @@ import AdminResourcesPage from './pages/AdminResourcesPage';
 import AdminNewResourcePage from './pages/AdminNewResourcePage';
 import AdminSettingsPage from './pages/AdminSettingsPage';
 import AdminEditResourcePage from './pages/AdminEditResourcePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -24,13 +25,49 @@ function App() {
         <Route path="/semesters" element={<SemestersPage />} />
         <Route path="/semesters/:semesterId" element={<SubjectsPage />} />
         <Route path="/subjects/:subjectId" element={<ResourcesPage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
-        <Route path="/admin/resources" element={<AdminResourcesPage />} />
-        <Route path="/admin/resources/new" element={<AdminNewResourcePage />} />
-        <Route path="/admin/settings" element={<AdminSettingsPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/resources"
+          element={
+            <ProtectedRoute>
+              <AdminResourcesPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/resources/new"
+          element={
+            <ProtectedRoute>
+              <AdminNewResourcePage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/admin/resources/:resourceId/edit"
-          element={<AdminEditResourcePage />}
+          element={
+            <ProtectedRoute>
+              <AdminEditResourcePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedRoute>
+              <AdminSettingsPage />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
