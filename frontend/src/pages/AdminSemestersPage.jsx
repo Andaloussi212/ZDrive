@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   getSemesters,
   createSemester,
@@ -145,9 +146,17 @@ function AdminSemestersPage() {
 
   return (
     <main className="admin-page">
-      <header className="page-header">
-        <h1>Gestion des semestres</h1>
-        <p>Ajoute, modifie ou supprime les semestres disponibles sur ZDrive.</p>
+      <header className="page-header page-header-row">
+        <div>
+          <h1>Gestion des semestres</h1>
+          <p>
+            Ajoute, modifie ou supprime les semestres disponibles sur ZDrive.
+          </p>
+        </div>
+
+        <Link to="/admin" className="button button-secondary">
+          Retour admin
+        </Link>
       </header>
 
       {error && <p className="empty-message message-error">{error}</p>}

@@ -77,9 +77,15 @@ function AdminResourcesPage() {
           </p>
         </div>
 
-        <Link to="/admin/resources/new" className="button">
-          Ajouter une ressource
-        </Link>
+        <div className="page-actions">
+          <Link to="/admin" className="button button-secondary">
+            Retour admin
+          </Link>
+
+          <Link to="/admin/resources/new" className="button">
+            Ajouter une ressource
+          </Link>
+        </div>
       </header>
 
       {error && <p className="empty-message message-error">{error}</p>}
