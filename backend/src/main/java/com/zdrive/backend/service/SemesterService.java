@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 import com.zdrive.backend.model.Semester;
 import com.zdrive.backend.model.SemesterRequest;
 import com.zdrive.backend.repository.SemesterRepository;
+import com.zdrive.backend.repository.SubjectRepository;
 
 @Service
 public class SemesterService {
 
     private final SemesterRepository semesterRepository;
+    private final SubjectRepository subjectRepository;
 
-    public SemesterService(SemesterRepository semesterRepository) {
+    public SemesterService(SemesterRepository semesterRepository,SubjectRepository subjectRepository) {
         this.semesterRepository = semesterRepository;
+        this.subjectRepository = subjectRepository;
     }
 
     public List<Semester> getSemesters() {
@@ -68,6 +71,10 @@ public class SemesterService {
     public String deleteSemester(Long id) {
         if (!semesterRepository.existsById(id)) {
             return "Semestre introuvable";
+        }
+
+        if (subjectRepository.existsBySemesterId(id)) {
+            return "Impossible de supprimer ce semestre car il contient des matières";
         }
 
         semesterRepository.deleteById(id);

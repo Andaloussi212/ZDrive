@@ -6,15 +6,18 @@ import org.springframework.stereotype.Service;
 
 import com.zdrive.backend.model.Subject;
 import com.zdrive.backend.model.SubjectRequest;
+import com.zdrive.backend.repository.ResourceRepository;
 import com.zdrive.backend.repository.SubjectRepository;
 
 @Service
 public class SubjectService {
 
     private final SubjectRepository subjectRepository;
+    private final ResourceRepository resourceRepository;
 
-    public SubjectService(SubjectRepository subjectRepository) {
+    public SubjectService(SubjectRepository subjectRepository,ResourceRepository resourceRepository) {
         this.subjectRepository = subjectRepository;
+        this.resourceRepository = resourceRepository;
     }
 
     public List<Subject> getSubjects() {
@@ -70,6 +73,10 @@ public class SubjectService {
     public String deleteSubject(Long id) {
         if (!subjectRepository.existsById(id)) {
             return "Matière introuvable";
+        }
+
+        if (resourceRepository.existsBySubjectId(id)) {
+            return "Impossible de supprimer cette matière car elle contient des ressources";
         }
 
         subjectRepository.deleteById(id);

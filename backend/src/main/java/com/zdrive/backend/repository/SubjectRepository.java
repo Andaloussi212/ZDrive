@@ -8,4 +8,6 @@ import com.zdrive.backend.model.Subject;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
     List<Subject> findBySemesterId(Long semesterId);
+
+    boolean existsBySemesterId(Long semesterId);
 }
