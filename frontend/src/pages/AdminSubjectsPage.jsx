@@ -16,6 +16,7 @@ function AdminSubjectsPage() {
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [editingSubjectId, setEditingSubjectId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -92,6 +93,16 @@ function AdminSubjectsPage() {
     event.preventDefault();
     setSubmitMessage('');
 
+    if (formData.name.trim() === '') {
+      setSubmitMessage('Le nom de la matière est obligatoire');
+      return;
+    }
+
+    if (formData.semesterId === '') {
+      setSubmitMessage('Le semestre est obligatoire');
+      return;
+    }
+
     const subjectData = {
       name: formData.name,
       semesterId: formData.semesterId,
@@ -137,8 +148,22 @@ function AdminSubjectsPage() {
   }
 
   function isErrorMessage(message) {
-    return message.toLowerCase().includes('impossible');
+    const lowerMessage = message.toLowerCase();
+
+    return (
+      lowerMessage.includes('impossible') ||
+      lowerMessage.includes('obligatoire')
+    );
   }
+
+  const filteredSubjects = subjects.filter((subject) => {
+    const search = searchTerm.toLowerCase();
+
+    return (
+      subject.name?.toLowerCase().includes(search) ||
+      getSemesterName(subject.semesterId).toLowerCase().includes(search)
+    );
+  });
 
   return (
     <main className="admin-page">
@@ -227,6 +252,21 @@ function AdminSubjectsPage() {
             </form>
           </section>
 
+          <div className="admin-toolbar">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Rechercher une matière..."
+              className="search-input"
+            />
+
+            <span>
+              {filteredSubjects.length} résultat
+              {filteredSubjects.length > 1 ? 's' : ''}
+            </span>
+          </div>
+
           <section className="admin-table-card">
             <table className="admin-table">
               <thead>
@@ -238,7 +278,7 @@ function AdminSubjectsPage() {
               </thead>
 
               <tbody>
-                {subjects.map((subject) => (
+                {filteredSubjects.map((subject) => (
                   <tr key={subject.id}>
                     <td>{subject.name}</td>
                     <td>{getSemesterName(subject.semesterId)}</td>
@@ -260,6 +300,11 @@ function AdminSubjectsPage() {
               </tbody>
             </table>
           </section>
+          {filteredSubjects.length === 0 && (
+            <p className="empty-message">
+              Aucune matière ne correspond à ta recherche.
+            </p>
+          )}
         </>
       )}
     </main>

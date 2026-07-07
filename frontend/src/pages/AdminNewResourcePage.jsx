@@ -140,7 +140,27 @@ function AdminNewResourcePage() {
     event.preventDefault();
 
     if (formData.title.trim() === '') {
-      setSubmitMessage('Le titre est obligatoire');
+      setSubmitMessage('Le titre de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.type.trim() === '') {
+      setSubmitMessage('Le type de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.format.trim() === '') {
+      setSubmitMessage('Le format de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.subjectId === '') {
+      setSubmitMessage('La matière est obligatoire');
+      return;
+    }
+
+    if (!formData.file) {
+      setSubmitMessage('Le fichier est obligatoire');
       return;
     }
 
@@ -181,6 +201,7 @@ function AdminNewResourcePage() {
       setSubmitting(false);
     }
   }
+
   return (
     <main className="admin-page">
       <header className="page-header">

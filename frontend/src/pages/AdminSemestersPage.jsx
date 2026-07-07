@@ -14,6 +14,7 @@ function AdminSemestersPage() {
   const [submitMessage, setSubmitMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [editingSemesterId, setEditingSemesterId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -76,6 +77,16 @@ function AdminSemestersPage() {
     event.preventDefault();
     setSubmitMessage('');
 
+    if (formData.name.trim() === '') {
+      setSubmitMessage('Le nom du semestre est obligatoire');
+      return;
+    }
+
+    if (formData.year.trim() === '') {
+      setSubmitMessage("L'année du semestre est obligatoire");
+      return;
+    }
+
     const semesterData = {
       name: formData.name,
       year: formData.year,
@@ -114,8 +125,23 @@ function AdminSemestersPage() {
   }
 
   function isErrorMessage(message) {
-    return message.toLowerCase().includes('impossible');
+    const lowerMessage = message.toLowerCase();
+
+    return (
+      lowerMessage.includes('impossible') ||
+      lowerMessage.includes('obligatoire')
+    );
   }
+
+  const filteredSemesters = semesters.filter((semester) => {
+    const search = searchTerm.toLowerCase();
+
+    return (
+      semester.name?.toLowerCase().includes(search) ||
+      semester.year?.toLowerCase().includes(search) ||
+      semester.description?.toLowerCase().includes(search)
+    );
+  });
 
   return (
     <main className="admin-page">
@@ -211,6 +237,21 @@ function AdminSemestersPage() {
             </form>
           </section>
 
+          <div className="admin-toolbar">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Rechercher un semestre..."
+              className="search-input"
+            />
+
+            <span>
+              {filteredSemesters.length} résultat
+              {filteredSemesters.length > 1 ? 's' : ''}
+            </span>
+          </div>
+
           <section className="admin-table-card">
             <table className="admin-table">
               <thead>
@@ -223,7 +264,7 @@ function AdminSemestersPage() {
               </thead>
 
               <tbody>
-                {semesters.map((semester) => (
+                {filteredSemesters.map((semester) => (
                   <tr key={semester.id}>
                     <td>{semester.name}</td>
                     <td>{semester.year}</td>
@@ -246,6 +287,11 @@ function AdminSemestersPage() {
               </tbody>
             </table>
           </section>
+          {filteredSemesters.length === 0 && (
+            <p className="empty-message">
+              Aucun semestre ne correspond à ta recherche.
+            </p>
+          )}
         </>
       )}
     </main>
