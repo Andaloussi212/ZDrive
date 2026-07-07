@@ -13,6 +13,7 @@ import AdminNewResourcePage from './pages/AdminNewResourcePage';
 import AdminSettingsPage from './pages/AdminSettingsPage';
 import AdminEditResourcePage from './pages/AdminEditResourcePage';
 import AdminSemestersPage from './pages/AdminSemestersPage';
+import AdminSubjectsPage from './pages/AdminSubjectsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -76,6 +77,15 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminSemestersPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/subjects"
+          element={
+            <ProtectedRoute>
+              <AdminSubjectsPage />
             </ProtectedRoute>
           }
         />

@@ -85,6 +85,15 @@ function AdminDashboardPage() {
                 Ajouter, modifier ou supprimer les semestres de la plateforme.
               </p>
             </Link>
+
+            <Link to="/admin/subjects" className="admin-action-card">
+              <span>Matières</span>
+              <strong>Gérer les matières →</strong>
+              <p>
+                Ajouter, modifier ou supprimer les matières associées aux
+                semestres.
+              </p>
+            </Link>
           </section>
         </>
       )}
