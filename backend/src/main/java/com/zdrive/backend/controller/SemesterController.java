@@ -70,6 +70,18 @@ public class SemesterController {
             return ResponseEntity.status(401).body("Non autorisé");
         }
 
-        return ResponseEntity.ok(semesterService.deleteSemester(id));
+        String result = semesterService.deleteSemester(id);
+
+        if (result.equals("NOT_FOUND")) {
+            return ResponseEntity.status(404).body("Semestre introuvable");
+        }
+
+        if (result.equals("HAS_SUBJECTS")) {
+            return ResponseEntity.status(409).body(
+                    "Impossible de supprimer ce semestre car il contient des matières"
+            );
+        }
+
+        return ResponseEntity.ok("Semestre supprimé");
     }
 }

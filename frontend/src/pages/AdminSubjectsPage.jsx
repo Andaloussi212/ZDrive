@@ -110,7 +110,7 @@ function AdminSubjectsPage() {
     }
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     const confirmed = window.confirm(
       'Voulez-vous vraiment supprimer cette matière ?'
     );
@@ -119,10 +119,13 @@ function AdminSubjectsPage() {
       return;
     }
 
-    deleteSubject(id).then((message) => {
+    try {
+      const message = await deleteSubject(id);
       setSubmitMessage(message);
       loadData();
-    });
+    } catch (error) {
+      setSubmitMessage(error.message);
+    }
   }
 
   function getSemesterName(semesterId) {

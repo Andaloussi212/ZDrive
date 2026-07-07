@@ -75,6 +75,18 @@ public class SubjectController {
             return ResponseEntity.status(401).body("Non autorisé");
         }
 
-        return ResponseEntity.ok(subjectService.deleteSubject(id));
+        String result = subjectService.deleteSubject(id);
+
+        if (result.equals("NOT_FOUND")) {
+            return ResponseEntity.status(404).body("Matière introuvable");
+        }
+
+        if (result.equals("HAS_RESOURCES")) {
+            return ResponseEntity.status(409).body(
+                    "Impossible de supprimer cette matière car elle contient des ressources"
+            );
+        }
+
+        return ResponseEntity.ok("Matière supprimée");
     }
 }

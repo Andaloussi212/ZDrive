@@ -95,7 +95,7 @@ function AdminSemestersPage() {
     }
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     const confirmed = window.confirm(
       'Voulez-vous vraiment supprimer ce semestre ?'
     );
@@ -104,10 +104,13 @@ function AdminSemestersPage() {
       return;
     }
 
-    deleteSemester(id).then((message) => {
+    try {
+      const message = await deleteSemester(id);
       setSubmitMessage(message);
       loadSemesters();
-    });
+    } catch (error) {
+      setSubmitMessage(error.message);
+    }
   }
 
   function isErrorMessage(message) {

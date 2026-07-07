@@ -70,15 +70,15 @@ public class SemesterService {
 
     public String deleteSemester(Long id) {
         if (!semesterRepository.existsById(id)) {
-            return "Semestre introuvable";
+            return "NOT_FOUND";
         }
 
         if (subjectRepository.existsBySemesterId(id)) {
-            return "Impossible de supprimer ce semestre car il contient des matières";
+            return "HAS_SUBJECTS";
         }
 
         semesterRepository.deleteById(id);
 
-        return "Semestre supprimé";
+        return "DELETED";
     }
 }

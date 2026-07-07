@@ -72,15 +72,15 @@ public class SubjectService {
 
     public String deleteSubject(Long id) {
         if (!subjectRepository.existsById(id)) {
-            return "Matière introuvable";
+            return "NOT_FOUND";
         }
 
         if (resourceRepository.existsBySubjectId(id)) {
-            return "Impossible de supprimer cette matière car elle contient des ressources";
+            return "HAS_RESOURCES";
         }
 
         subjectRepository.deleteById(id);
 
-        return "Matière supprimée";
+        return "DELETED";
     }
 }

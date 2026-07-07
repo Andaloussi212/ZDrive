@@ -3,7 +3,10 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 async function handleResponse(response) {
   if (!response.ok) {
-    throw new Error('Erreur lors de la communication avec le serveur');
+    const errorMessage = await response.text();
+    throw new Error(
+      errorMessage || 'Erreur lors de la communication avec le serveur'
+    );
   }
 
   return response;
