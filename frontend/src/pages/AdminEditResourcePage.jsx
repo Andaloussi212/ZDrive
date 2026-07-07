@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getResources, updateResource, uploadFile } from '../services/Api';
 import Button from '../components/Button';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
@@ -113,6 +113,27 @@ function AdminEditResourcePage() {
     event.preventDefault();
 
     setSubmitMessage('');
+
+    if (formData.title.trim() === '') {
+      setSubmitMessage('Le titre de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.type.trim() === '') {
+      setSubmitMessage('Le type de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.format.trim() === '') {
+      setSubmitMessage('Le format de la ressource est obligatoire');
+      return;
+    }
+
+    if (formData.subjectId === '') {
+      setSubmitMessage('La matière est obligatoire');
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -152,9 +173,15 @@ function AdminEditResourcePage() {
 
   return (
     <main className="admin-page">
-      <header className="page-header">
-        <h1>Modifier une ressource</h1>
-        <p>Modification de la ressource numéro {resourceId}.</p>
+      <header className="page-header page-header-row">
+        <div>
+          <h1>Modifier une ressource</h1>
+          <p>Modification de la ressource numéro {resourceId}.</p>
+        </div>
+
+        <Link to="/admin/resources" className="button button-secondary">
+          Retour aux ressources
+        </Link>
       </header>
 
       {error && <p className="empty-message">{error}</p>}

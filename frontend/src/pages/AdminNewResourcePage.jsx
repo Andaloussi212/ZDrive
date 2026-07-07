@@ -7,7 +7,7 @@ import {
   uploadFile,
 } from '../services/Api';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 function AdminNewResourcePage() {
@@ -63,6 +63,9 @@ function AdminNewResourcePage() {
   const filteredSubjects = subjects.filter(
     (subject) => subject.semesterId === Number(formData.semesterId)
   );
+
+  const selectedSemesterHasNoSubjects =
+    formData.semesterId !== '' && filteredSubjects.length === 0;
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -154,6 +157,13 @@ function AdminNewResourcePage() {
       return;
     }
 
+    if (selectedSemesterHasNoSubjects) {
+      setSubmitMessage(
+        "Aucune matière n'existe pour ce semestre. Ajoute d'abord une matière."
+      );
+      return;
+    }
+
     if (formData.subjectId === '') {
       setSubmitMessage('La matière est obligatoire');
       return;
@@ -204,9 +214,15 @@ function AdminNewResourcePage() {
 
   return (
     <main className="admin-page">
-      <header className="page-header">
-        <h1>Ajouter une ressource</h1>
-        <p>Formulaire d'ajout d'un nouveau fichier sur ZDrive</p>
+      <header className="page-header page-header-row">
+        <div>
+          <h1>Ajouter une ressource</h1>
+          <p>Formulaire d'ajout d'un nouveau fichier sur ZDrive</p>
+        </div>
+
+        <Link to="/admin/resources" className="button button-secondary">
+          Retour aux ressources
+        </Link>
       </header>
 
       {error && <p className="empty-message">{error}</p>}
@@ -266,6 +282,7 @@ function AdminNewResourcePage() {
                 id="subjectId"
                 value={formData.subjectId}
                 onChange={handleChange}
+                disabled={selectedSemesterHasNoSubjects}
               >
                 {filteredSubjects.map((subject) => (
                   <option key={subject.id} value={subject.id}>
@@ -273,7 +290,24 @@ function AdminNewResourcePage() {
                   </option>
                 ))}
               </select>
+
+              {selectedSemesterHasNoSubjects && (
+                <div className="empty-message message-error">
+                  <p>
+                    Aucune matière n'existe pour ce semestre. Ajoute d'abord une
+                    matière.
+                  </p>
+
+                  <Link
+                    to="/admin/subjects"
+                    className="button button-secondary"
+                  >
+                    Gérer les matières
+                  </Link>
+                </div>
+              )}
             </div>
+
             <div className="form-group">
               <label htmlFor="type">Type de ressource</label>
               <select id="type" value={formData.type} onChange={handleChange}>
