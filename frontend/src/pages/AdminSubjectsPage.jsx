@@ -133,6 +133,10 @@ function AdminSubjectsPage() {
     return semester ? semester.name : 'Semestre inconnu';
   }
 
+  function isErrorMessage(message) {
+    return message.toLowerCase().includes('impossible');
+  }
+
   return (
     <main className="admin-page">
       <header className="page-header">
@@ -190,7 +194,15 @@ function AdminSubjectsPage() {
               </div>
 
               {submitMessage && (
-                <p className="empty-message message-success">{submitMessage}</p>
+                <p
+                  className={`empty-message ${
+                    isErrorMessage(submitMessage)
+                      ? 'message-error'
+                      : 'message-success'
+                  }`}
+                >
+                  {submitMessage}
+                </p>
               )}
 
               <Button
