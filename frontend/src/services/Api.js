@@ -90,3 +90,83 @@ export async function uploadFile(file) {
   const checkedResponse = await handleResponse(response);
   return checkedResponse.text();
 }
+
+export async function createSemester(semesterData) {
+  const response = await fetch(`${API_BASE_URL}/semesters`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+    body: JSON.stringify(semesterData),
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
+
+export async function updateSemester(id, semesterData) {
+  const response = await fetch(`${API_BASE_URL}/semesters/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+    body: JSON.stringify(semesterData),
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
+
+export async function deleteSemester(id) {
+  const response = await fetch(`${API_BASE_URL}/semesters/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
+
+export async function createSubject(subjectData) {
+  const response = await fetch(`${API_BASE_URL}/subjects`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+    body: JSON.stringify(subjectData),
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
+
+export async function updateSubject(id, subjectData) {
+  const response = await fetch(`${API_BASE_URL}/subjects/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+    body: JSON.stringify(subjectData),
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}
+
+export async function deleteSubject(id) {
+  const response = await fetch(`${API_BASE_URL}/subjects/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-Admin-Password': ADMIN_PASSWORD,
+    },
+  });
+
+  const checkedResponse = await handleResponse(response);
+  return checkedResponse.text();
+}

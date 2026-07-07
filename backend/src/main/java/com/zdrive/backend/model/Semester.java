@@ -46,4 +46,16 @@ public class Semester {
     public String getDescription() {
         return description;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+public void setYear(String year) {
+        this.year = year;
+    }
+
+public void setDescription(String description) {
+        this.description = description;
+    }
 }

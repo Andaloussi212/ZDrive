@@ -77,6 +77,14 @@ function AdminDashboardPage() {
               <strong>Configurer ZDrive →</strong>
               <p>Préparer les réglages futurs de la plateforme.</p>
             </Link>
+
+            <Link to="/admin/semesters" className="admin-action-card">
+              <span>Semestres</span>
+              <strong>Gérer les semestres →</strong>
+              <p>
+                Ajouter, modifier ou supprimer les semestres de la plateforme.
+              </p>
+            </Link>
           </section>
         </>
       )}
